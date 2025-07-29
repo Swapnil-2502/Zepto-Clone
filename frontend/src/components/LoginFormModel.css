@@ -1,0 +1,27 @@
+.login-container{
+    width: 30rem;
+    background: url(https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.4.1/_next/static/media/bg-login.32d6e9e5.svg) top 15% left / cover no-repeat;
+}
+
+.tracking-wider {
+    letter-spacing: .05em;
+}
+
+.text-skin-base {
+    --tw-text-opacity: 1;
+    color: rgb(229, 231, 235, 1);
+}
+
+.font-heading {
+    font-weight: 700;
+}
+
+.text-skin-primary {
+    --tw-text-opacity: 1;
+    color: rgba(239, 67, 114, 1)
+}
+
+.login-container-get-the-app {
+    background: url(https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.4.1/_next/static/media/bg-desktop.7efcec3a.png) 0 0 / cover no-repeat;
+}
+
