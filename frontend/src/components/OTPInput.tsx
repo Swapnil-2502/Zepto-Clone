@@ -22,7 +22,6 @@ const OTPInput: React.FC<OTPprops> = ({ phone, onBack, onVerifySuccess }) => {
         const newotp = [...otp]
         newotp[index] = value
         setOtp(newotp)
-        console.log("From Inside: ",newotp);
 
         if (value && index < length - 1) {
             inputRefs.current[index + 1]?.focus();
@@ -43,7 +42,7 @@ const OTPInput: React.FC<OTPprops> = ({ phone, onBack, onVerifySuccess }) => {
         <div className="verifyOTP-container">
             <div className="verifyOTP-container-sub_container">
                 <div className="relative z-50">
-                    <button className="py-1 px-7 text-base border-skin-primary border text-skin-primary border-none fixed top-6 left-0 z-[100]" type="button" onClick={onBack}>
+                    <button className="py-1 px-7 text-base border-skin-primary border text-skin-primary border-none fixed top-6 left-0 z-[100] cursor-pointer" type="button" onClick={onBack}>
                         <div className="flex items-center justify-center">
                             <svg fill="none" height="12" viewBox="0 0 22 12" width="22" xmlns="http://www.w3.org/2000/svg">
                                  <path d="M1.49927 5.85254C1.49927 5.30025 1.94698 4.85254 2.49927 4.85254H20.9997C21.552 4.85254 21.9997 5.30025 21.9997 5.85254V6.62431C21.9997 7.1766 21.552 7.62431 20.9997 7.62431H2.49927C1.94698 7.62431 1.49927 7.17659 1.49927 6.62431V5.85254Z" fill="white"></path>
