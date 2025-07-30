@@ -1,6 +1,8 @@
 import type React from 'react';
 import './LoginFormModel.css'
 import { useEffect, useState } from 'react';
+import PhoneInput from './PhoneInput';
+import OTPInput from './OTPInput';
 
 interface LoginFormModalProps {
   isOpen: boolean;
@@ -8,7 +10,7 @@ interface LoginFormModalProps {
 }
 
 const LoginFormModel:React.FC<LoginFormModalProps> = ({isOpen,onClose}) => {
-    
+
 
     if (!isOpen) return null;
 
@@ -19,6 +21,9 @@ const LoginFormModel:React.FC<LoginFormModalProps> = ({isOpen,onClose}) => {
              document.body.style.overflow = ""
         }
     },[])
+
+    const [step, setStep] = useState<1 | 2 | 3>(1);
+    const [phoneNumber, setPhoneNumber] = useState("")
 
     const [phone,setPhone] = useState("")
     const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +57,22 @@ const LoginFormModel:React.FC<LoginFormModalProps> = ({isOpen,onClose}) => {
             <div className="">
                 <div className="relative mt-[0.05rem] sm:mt-0">
                     <div className="relative flex w-full flex-row">
-                        <div className="login-container">
+                        {step === 1 && (
+                            <PhoneInput 
+                                onContinue={(phone)=>{
+                                    setPhoneNumber(phone)
+                                    setStep(2)
+                                }}
+                            />
+                        )}
+                        {step === 2 && (
+                            <OTPInput 
+                                phone={phoneNumber}
+                                onBack={() => setStep(1)}
+                                onVerifySuccess={() => setStep(3)}
+                            />
+                        )}
+                        {/* <div className="login-container">
                             <div className="h-screen w-screen overflow-auto p-6 sm:h-full sm:w-full sm:p-8 sm:pt-12 !pt-[20%] no-scrollbar">
                                 <div>
                                     <img alt="zepto-logo" fetchPriority="low" loading="lazy" width="164" height="54" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.4.1/tr:w-0.2,ar-0.2-0.2,pr-true,f-auto,q-80//images/logo.svg" style={{color: "transparent", objectFit: "contain"}}/>
@@ -80,7 +100,7 @@ const LoginFormModel:React.FC<LoginFormModalProps> = ({isOpen,onClose}) => {
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="login-container-get-the-app hidden w-2/5 !bg-white sm:block">
                             <div className="z-40 flex h-full w-full flex-col items-center overflow-auto pt-4">
                                 <img alt="get-the-app-phone" fetchPriority="low" loading="lazy" width="100" height="100" decoding="async" data-nimg="1" className="relative overflow-hidden mt-5" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.4.1/tr:w-100,ar-100-100,pr-true,f-auto,q-80//images/get-the-app/get-the-app-phone.png" style={{color: "transparent", objectFit: "contain"}}/>

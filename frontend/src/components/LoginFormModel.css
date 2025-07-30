@@ -25,3 +25,29 @@
     background: url(https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.4.1/_next/static/media/bg-desktop.7efcec3a.png) 0 0 / cover no-repeat;
 }
 
+.verifyOTP-container {
+    width: 30rem;
+    background: url(https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.4.1/_next/static/media/bg-login.32d6e9e5.svg) top 15% left / cover no-repeat;
+}
+
+.verifyOTP-container-sub_container {
+    background: url(https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.4.1/_next/static/media/bg-login.32d6e9e5.svg) top 15% left / cover no-repeat;
+}
+
+@media (min-width: 640px) {
+    .verifyOTP-container-sub_container {
+        height: 100%;
+        width: 100%;
+        padding: 3rem 2rem 2rem;
+    }
+}
+
+.text-skin-primary {
+    --tw-text-opacity: 1;
+    color: rgba(var(--color-primary), var(--tw-text-opacity));
+}
+
+.border-skin-primary {
+    --tw-border-opacity: 1;
+    border-color: rgba(var(--color-primary), var(--tw-border-opacity));
+}
