@@ -62,14 +62,18 @@ export const updateName = async (req: AuthRequest, res: Response)=> {
 
 }
 
-export const updateEmail = async (req: AuthRequest, res: Response)=> {
-    const {email} = req.body
+export const updateNameEmail = async (req: AuthRequest, res: Response)=> {
+    const {email, name} = req.body
     const userId = req.userId
 
     try{
-        if(!email) return res.status(400).json({ message: "Email is required." });
+        if(!email && !name) return res.status(400).json({ message: "Email or Name is required." });
 
-        const user = await User.findByIdAndUpdate(userId,{email},{new:true})
+        const updatedDetails:{name?: string, email?:string} = {}
+        if(name) updatedDetails.name = name
+        if(email) updatedDetails.email = email
+
+        const user = await User.findByIdAndUpdate(userId,updatedDetails,{new:true})
 
         if(!user){
             return res.status(404).json({ message: "User not found." });
