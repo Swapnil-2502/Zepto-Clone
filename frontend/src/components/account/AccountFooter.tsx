@@ -1,10 +1,19 @@
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../contexts/AuthContext"
 
 
 const AccountFooter: React.FC = () => {
+    const {logout} = useAuth()
+    const navigate = useNavigate()
+
+    const handleLogout = async() => {
+        logout()
+        navigate('/')
+    }
   return (
    <>
          <div className="hidden lg:block">
-            <button className="py-1 px-7 border-skin-primary border border-none mx-auto mt-7 flex h-full w-max justify-center text-md font-semibold text-skin-inverted" type="button">
+            <button className="py-1 px-7 border-skin-primary border border-none mx-auto mt-7 flex h-full w-max justify-center text-md font-semibold text-skin-inverted" type="button" onClick={handleLogout}>
                 <div className="flex items-center justify-center">Log Out</div>
             </button>
             <div className="mt-8 text-center">

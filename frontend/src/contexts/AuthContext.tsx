@@ -1,10 +1,11 @@
 import axios from "../api/axios";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 
 type User = {
     phone: string,
-    name?: string
+    name?: string,
+    email?:string
 }
 
 type AuthContextType = {
@@ -12,6 +13,7 @@ type AuthContextType = {
     token: string | null;
     loginUser: (phone: string, otp: string) => Promise<"newUser" | "loggedIn">; 
     addName: (name: string) => Promise<void>;
+    updateNameEmail: ({name,email}:{name?: string, email?: string}) => Promise<void>;
     logout: () => void;
 }
 
@@ -21,12 +23,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | null>(null)
     const [token, setToken] = useState<string | null>(null);
 
+    useEffect(()=>{
+        const savedToken = localStorage.getItem('token')
+        const savedUser = localStorage.getItem("user")
+
+        if (savedToken && savedUser) {
+            setToken(savedToken);
+            setUser(JSON.parse(savedUser));
+        }
+    },[])
+
     const loginUser = async (phone: string, otp: string) => {
         const res = await axios.post("/auth/verify-otp",{phone,otp});
         const data = res.data
       
         setToken(data.token)
         setUser({phone: data.user.phone, name: data.user.name})
+
+        localStorage.setItem("token", data.token)
+        localStorage.setItem("user",JSON.stringify({ phone: data.user.phone, name: data.user.name }))
 
         return data.user.name ? "loggedIn" : "newUser"
     }
@@ -36,16 +51,34 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             headers: { Authorization: `Bearer ${token}` },
         });
 
-        setUser((prev) => prev ? { ...prev, name } : null);
+        setUser((prev) => {
+            const updatedUser = prev ? { ...prev, name } : null;
+            localStorage.setItem("user",JSON.stringify(updatedUser))
+            return updatedUser
+        });
+    }
+
+    const updateNameEmail = async ({name,email}:{name?: string, email?: string}) => {
+        await axios.put("/auth/update-name-email", {name,email}, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+
+        setUser((prev) => {
+            const updatedUser = prev ? {...prev, ...(email ? { email } : {}), ...(name ? { name } : {})} : null;
+            localStorage.setItem("user",JSON.stringify(updatedUser))
+            return updatedUser
+        })
     }
 
     const logout = () => {
         setUser(null);
         setToken(null);
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
     }
 
     return (
-        <AuthContext.Provider value={{user, token, loginUser, addName, logout}}>
+        <AuthContext.Provider value={{user, token, loginUser, addName, logout, updateNameEmail}}>
             {children}
         </AuthContext.Provider> 
     )

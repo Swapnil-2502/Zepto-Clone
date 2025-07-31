@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-
-
 type PhoneInputProps = {
   onContinue: (phone: string) => void;
 };

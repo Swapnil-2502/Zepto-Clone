@@ -1,7 +1,9 @@
+import { useAuth } from "../../contexts/AuthContext"
 
 
 
 const AccountHeader: React.FC = () => {
+    const {user} = useAuth();
   return (
     <>
         <header className="mt-2">
@@ -9,8 +11,8 @@ const AccountHeader: React.FC = () => {
                 <div className="non-pass-profile-header_non-pass-profile-header__container__QB995">
                     <img alt="Swapnil Hajare" loading="lazy" width="50" height="50" decoding="async" data-nimg="1" className="non-pass-profile-header_non-pass-profile-header__image__jbkWB" srcSet="https://cdn.zeptonow.com/production/app/svg/ProfileIconNonMember.svg 1x" src="https://cdn.zeptonow.com/production/app/svg/ProfileIconNonMember.svg" style={{color: "transparent"}}/>
                     <div className="non-pass-profile-header_non-pass-profile-header__info__gTmDc">
-                        <h3 className="non-pass-profile-header_non-pass-profile-header__name__XZrX0">Swapnil Hajare</h3>
-                        <p className="non-pass-profile-header_non-pass-profile-header__mobile__iNT4F">8446622053</p>
+                        <h3 className="non-pass-profile-header_non-pass-profile-header__name__XZrX0">{user?.name}</h3>
+                        <p className="non-pass-profile-header_non-pass-profile-header__mobile__iNT4F">{user?.phone}</p>
                     </div>
                 </div>
                 <a data-unstyled="true" href="/buy-pass">

@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { AuthProvider } from './contexts/AuthContext.tsx'
+import { BrowserRouter } from 'react-router-dom'
 
 import '../public/zepto-clone-styles/zepto-style1.css'
 import '../public/zepto-clone-styles/zepto-style2.css'
@@ -13,9 +14,11 @@ import '../public/zepto-clone-styles/zepto-style6.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
     
   </StrictMode>,
 )
