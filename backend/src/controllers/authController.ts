@@ -29,7 +29,8 @@ export const verifyOTP = async (req: Request, res: Response)=> {
             token,
             user:{
                 id: user._id,
-                phone: user.phone
+                phone: user.phone,
+                name: user.name || null
             }
         })
     }

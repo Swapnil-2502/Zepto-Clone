@@ -5,9 +5,9 @@ import { authMiddleware } from '../middlewares/authMiddleware'
 
 const router = express.Router()
 
-router.use(authMiddleware as RequestHandler)
+// router.use(authMiddleware as RequestHandler)
 
 router.post("/verify-otp",verifyOTP)
-router.put("/add-name",updateName)
+router.put("/add-name",authMiddleware,updateName)
 
 export default router
