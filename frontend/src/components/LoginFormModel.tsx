@@ -1,5 +1,4 @@
 import type React from 'react';
-import './LoginFormModel.css'
 import { useEffect, useState } from 'react';
 import PhoneInput from './PhoneInput';
 import OTPInput from './OTPInput';

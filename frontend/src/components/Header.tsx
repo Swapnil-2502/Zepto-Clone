@@ -84,14 +84,14 @@ const Header: React.FC = () => {
 
               <span className="flex flex-1 items-center gap-x-1 text-md font-extralight text-gray-700">
                 <span>Search for</span>
-                {/* <ul className="relative flex-1">
+                <ul className="relative flex-1">
                   <li className="absolute animate-search-items opacity-0" style={{ animationDelay: "0s", animationDuration: "18s" }}>"kurkure"</li>
                   <li className="absolute animate-search-items opacity-0" style={{ animationDelay: "3s", animationDuration: "18s" }}>"apple juice"</li>
                   <li className="absolute animate-search-items opacity-0" style={{ animationDelay: "6s", animationDuration: "18s" }}>"cheese slices"</li>
                   <li className="absolute animate-search-items opacity-0" style={{ animationDelay: "9s", animationDuration: "18s" }}>"chocolate box"</li>
                   <li className="absolute animate-search-items opacity-0" style={{ animationDelay: "12s", animationDuration: "18s" }}>"amul butter"</li>
                   <li className="absolute animate-search-items opacity-0" style={{ animationDelay: "15s", animationDuration: "18s" }}>"banana"</li>
-                </ul>  */}
+                </ul> 
               </span>
             </a>
           </div>

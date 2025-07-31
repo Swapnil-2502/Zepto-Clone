@@ -1,3 +1,4 @@
+import Account from '../components/Account'
 import Header from '../components/Header'
 
 function Home() {
@@ -5,6 +6,7 @@ function Home() {
   return (
     <>
         <Header />
+        <Account />
     </>
   )
 }
