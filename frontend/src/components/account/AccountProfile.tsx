@@ -84,7 +84,7 @@ const AccountProfile = () => {
                 </form>
                 <hr className="profile_profileScreen__separator__UbYTp"/>
                 <div className="flex flex-col items-start gap-y-1">
-                    <button className="py-1 px-7 text-base border-skin-primary border text-skin-primary border-none !px-0 !text-lg !font-semibold" type="button" onClick={()=>setShowDeleteModel(true)}>
+                    <button className="py-1 border-skin-primary border text-skin-primary border-none !px-0 !text-lg !font-semibold" type="button" onClick={()=>setShowDeleteModel(true)}>
                         <div className="flex items-center justify-center">Delete Account</div>
                     </button>
                     <p className="text-gray-600">Deleting your account will remove all your orders, wallet amount and any active referral</p>
@@ -106,10 +106,10 @@ const AccountProfile = () => {
                                             <h5 className="text-xl font-semibold">Sad To See You Go</h5>
                                             <p className="text-sm text-gray-600">You will lose your past order details. Would you still like to proceed?</p>
                                             <div className="my-5 grid w-full grid-cols-2 gap-5">
-                                                <button className="py-1 px-7 text-base border-skin-primary border text-skin-primary bg-skin-base rounded-md tracking-widest !py-2.5 !leading-normal" type="button">
+                                                <button className=" px-7 text-base border-skin-primary border text-skin-primary bg-skin-base rounded-md tracking-widest !py-2.5 !leading-normal" type="button">
                                                     <div className="flex items-center justify-center" onClick={()=>setShowDeleteModel(false)}>No, Thank You</div>
                                                 </button>
-                                                <button className="py-1 px-7 text-base border-skin-primary border bg-skin-primary text-skin-base rounded-md tracking-widest !py-2.5 !leading-normal" type="button" onClick={handleDeleteAccount}>
+                                                <button className=" px-7 text-base border-skin-primary border bg-skin-primary text-skin-base rounded-md tracking-widest !py-2.5 !leading-normal" type="button" onClick={handleDeleteAccount}>
                                                     <div className="flex items-center justify-center">Continue</div>
                                                 </button>
                                             </div>

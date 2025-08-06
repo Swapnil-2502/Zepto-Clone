@@ -21,7 +21,7 @@ const AccountCustomerSupport = () => {
                 </header>
             </div>
             <div className="mx-4 mt-[1rem] sm:mt-6">
-                <h4 className="font-heading text-lg tracking-wide line-clamp-2 mb-1 w-2/3 !text-xl !font-bold sm:mb-4">FAQs</h4>
+                <h4 className="font-heading tracking-wide line-clamp-2 mb-1 w-2/3 !text-xl !font-bold sm:mb-4">FAQs</h4>
                 <ul>
                     <li>
                         <a className="list-item-arrow flex !w-full cursor-pointer items-center justify-between py-4 after:ml-[10px] after:inline-block after:h-7" href="/account/support/3e9cc8ec-c9f5-4edf-91e0-8f34879b1010?order-related-faq=false">
