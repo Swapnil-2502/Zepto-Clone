@@ -1,6 +1,15 @@
-import React from 'react'
+import { useState } from "react"
+import AccountAddressForm from "./AccountAddressForm"
+
+
 
 const AccountAddress = () => {
+    const [showAddressForm, setshowAddressForm] = useState(false)
+
+    const handleCloseForm = ()=> {
+        setshowAddressForm(false)
+    }
+
   return (
     <>
         <div className="hidden flex-col lg:block lg:h-[80vh] lg:w-2/3 lg:overflow-y-scroll lg:rounded-r-3xl lg:border-l" id="desktop-order-details-section">
@@ -14,7 +23,7 @@ const AccountAddress = () => {
                                 </div>
                                 <div className="_list-item-text-container_18zsn_23">
                                     <div className="_list-item-title-section_18zsn_31">
-                                        <div className="_list-item-title_18zsn_31" data-size="small">
+                                        <div className="_list-item-title_18zsn_31" data-size="small" onClick={()=>setshowAddressForm(true)}>
                                             <span className="addresses_addNewAddressText__1TMu8">Add New Address</span>
                                         </div>
                                     </div>
@@ -42,6 +51,9 @@ const AccountAddress = () => {
                 </div>
             </div>
         </div>
+        {showAddressForm && (
+            <AccountAddressForm onClose={handleCloseForm}/>
+        )}
     </>
   )
 }

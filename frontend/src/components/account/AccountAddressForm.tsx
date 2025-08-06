@@ -1,6 +1,11 @@
 
 
-const Dummy = () => {
+interface AccountAddressFormProps {
+  onClose: () => void;
+}
+
+const AccountAddressForm: React.FC<AccountAddressFormProps> = ({onClose}) => {
+    
   return (
     <>
         <div className="fixed inset-0 z-[99999999] overflow-y-hidden bg-black/70 transition-opacity ease-in">
@@ -19,7 +24,7 @@ const Dummy = () => {
                                                 </svg>
                                             </button>
                                             <p className="block font-heading text-lg tracking-wide w-full pl-2">Add Address Details</p>
-                                            <button aria-label="Location modal close Icon" className="absolute right-2 hidden sm:block">
+                                            <button aria-label="Location modal close Icon" className="absolute right-2 hidden sm:block" onClick={onClose}>
                                                 <svg fill="none" height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg">
                                                     <path clip-rule="evenodd" d="M15.75 9C15.75 12.7279 12.7279 15.75 9 15.75C5.27208 15.75 2.25 12.7279 2.25 9C2.25 5.27208 5.27208 2.25 9 2.25C12.7279 2.25 15.75 5.27208 15.75 9ZM5.46967 12.5303C5.17678 12.2374 5.17678 11.7626 5.46967 11.4697L7.93934 9L5.46967 6.53033C5.17678 6.23744 5.17678 5.76256 5.46967 5.46967C5.76256 5.17678 6.23744 5.17678 6.53033 5.46967L9 7.93934L11.4697 5.46967C11.7626 5.17678 12.2374 5.17678 12.5303 5.46967C12.8232 5.76256 12.8232 6.23744 12.5303 6.53033L10.0607 9L12.5303 11.4697C12.8232 11.7626 12.8232 12.2374 12.5303 12.5303C12.2374 12.8232 11.7626 12.8232 11.4697 12.5303L9 10.0607L6.53033 12.5303C6.23744 12.8232 5.76256 12.8232 5.46967 12.5303Z" fill="#130022" fill-opacity="0.4" fill-rule="evenodd"></path>
                                                 </svg>
@@ -31,24 +36,11 @@ const Dummy = () => {
                                                     <div className="px-4">
                                                         <div className="mb-4 flex flex-row items-center justify-between">
                                                             <div className="block">
-                                                                <h4 className="block font-heading text-lg tracking-wide">Saved Location</h4>
+                                                                <h4 className="block font-heading text-lg tracking-wide"></h4>
                                                             </div>
                                                             <button className="py-1 px-7 text-base border-skin-primary border text-skin-primary border-none mx-0 mb-0 mt-1 whitespace-nowrap !p-0 font-norms font-semibold" type="button" aria-label="Change">
-                                                                <div className="flex items-center justify-center">Change</div>
+                                                                <div className="flex items-center justify-center"></div>
                                                             </button>
-                                                        </div>
-                                                        <div className="rounded-lg bg-[#6D4090] px-4 pb-4 text-skin-base">
-                                                            <div className="flex cursor-pointer items-center pt-4 text-left undefined">
-                                                                    <span className="undefined">
-                                                                        <img alt="location-marker-icon" fetchPriority="low" loading="lazy" width="18" height="19" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.7.0/tr:w-0.2,ar-0.2-0.2,pr-true,f-auto,q-80//images/google-map/location-marker-base-icon.svg" style={{color: "transparent", objectFit: "contain"}}/>
-                                                                    </span>
-                                                                    <div className="ml-4 w-full undefined undefined ">
-                                                                        <div>
-                                                                            <h4 className="font-heading text-lg tracking-wide line-clamp-1 mb-1 break-all capitalize">Dhadiwal Layout</h4>
-                                                                            <p className="font-body text-base line-clamp-1 text-skin-base/80 break-all">Plot no 110, near Sambodhi Buddha Mahavihar &amp; Library, Dhadiwal Layout, पार्वती नगर, नागपूर, महाराष्ट्र 440027, India</p>
-                                                                        </div>
-                                                                    </div>
-                                                            </div>
                                                         </div>
                                                         <form className="mt-6 mb-20 flex grow flex-col justify-end">
                                                             <div className="flex max-h-[28rem] flex-1 flex-col overflow-auto overscroll-y-contain pb-36 sm:max-h-[36rem] sm:pb-72">
@@ -122,4 +114,4 @@ const Dummy = () => {
   )
 }
 
-export default Dummy
+export default AccountAddressForm
