@@ -2,8 +2,20 @@ import type React from "react"
 import AccountHeader from "./account/AccountHeader"
 import AccountFooter from "./account/AccountFooter"
 import AccountProfile from "./account/AccountProfile"
+import AccountAddress from "./account/AccountAddress"
+import AccountCustomerSupport from "./account/AccountCustomerSupport"
 
 const Account: React.FC = () => {
+    const renderedContent = () => {
+        switch(location.pathname){
+            case "/account/profile":
+                return <AccountProfile />
+            case "/account/addresses":
+                return <AccountAddress />
+            case "/account/support":
+                return <AccountCustomerSupport />
+        }
+    }
   return (
     <>
         <div className="m-auto max-w-7xl">
@@ -56,7 +68,7 @@ const Account: React.FC = () => {
                                     </a>
                                     <img alt="right-arrow-icon" fetchPriority="low" loading="lazy" width="7" height="9" decoding="async" data-nimg="1" className="relative overflow-hidden lg:hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.5.2/tr:w-5,ar-5-5,pr-true,f-auto,q-80//images/right-arrow.svg"style={{color: "transparent", objectFit: "contain"}}/>
                                 </div>
-                                <div className="flex flex-row items-center border-b border-b-skin-muted-lightest sm:first:border-t lg:px-6 lg:bg-slate-200">
+                                <div className="flex flex-row items-center border-b border-b-skin-muted-lightest sm:first:border-t lg:px-6">
                                     <svg fill="none" height="24" viewBox="0 0 26 26" width="24" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12.5" cy="11.168" r="3.5" stroke="black" stroke-linecap="round" stroke-width="1.6"></circle>
                                         <circle cx="12.5" cy="13.5" r="10.5" stroke="black" stroke-width="1.6"></circle>
@@ -73,7 +85,7 @@ const Account: React.FC = () => {
 
                         </div>
                     </aside>
-                    <AccountProfile />
+                    {renderedContent()}
                 </div>
             </div>
         </div>

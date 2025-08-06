@@ -1,6 +1,6 @@
 
 
-const Dummy = () => {
+const AccountCustomerSupport = () => {
   return (
     <>
         <div className="hidden flex-col lg:block lg:h-[80vh] lg:w-2/3 lg:overflow-y-scroll lg:rounded-r-3xl lg:border-l" id="desktop-order-details-section">
@@ -88,4 +88,4 @@ const Dummy = () => {
   )
 }
 
-export default Dummy
+export default AccountCustomerSupport

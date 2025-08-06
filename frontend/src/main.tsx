@@ -12,6 +12,7 @@ import '../public/zepto-clone-styles/zepto-style3.css'
 import '../public/zepto-clone-styles/zepto-style4.css'
 import '../public/zepto-clone-styles/zepto-style5.css'
 import '../public/zepto-clone-styles/zepto-style6.css'
+import '../public/zepto-clone-styles/zepto-style7.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

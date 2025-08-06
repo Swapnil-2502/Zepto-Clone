@@ -11,7 +11,9 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/account" element={<Account />} />
+          <Route path="/account/profile" element={<Account />} />
+          <Route path="/account/addresses" element={<Account />} />
+          <Route path="/account/support" element={<Account />} />
         </Routes>
     </>
   )

@@ -105,7 +105,7 @@ const Header: React.FC = () => {
           <div className="inline-block">
             <button className="cursor-pointer" aria-label="login" type="button" onClick={() =>{
               if(user){
-                navigate("/account")
+                navigate("/account/profile")
               }
               else{
                 setIsLoginOpen(true)}
