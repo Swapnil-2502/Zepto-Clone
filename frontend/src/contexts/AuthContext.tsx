@@ -15,6 +15,7 @@ type AuthContextType = {
     addName: (name: string) => Promise<void>;
     updateNameEmail: ({name,email}:{name?: string, email?: string}) => Promise<void>;
     logout: () => void;
+    deleteAccount: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -77,8 +78,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         localStorage.removeItem("user");
     }
 
+    const deleteAccount = async () =>{
+        await axios.delete("/auth/delete",{
+            headers: { Authorization: `Bearer ${token}` }
+        })
+
+        setUser(null)
+        setToken(null)
+        localStorage.removeItem("token")
+        localStorage.removeItem("user")
+    }
+
     return (
-        <AuthContext.Provider value={{user, token, loginUser, addName, logout, updateNameEmail}}>
+        <AuthContext.Provider value={{user, token, loginUser, addName, logout, updateNameEmail, deleteAccount}}>
             {children}
         </AuthContext.Provider> 
     )
