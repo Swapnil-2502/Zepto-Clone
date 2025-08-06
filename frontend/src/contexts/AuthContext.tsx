@@ -36,12 +36,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const loginUser = async (phone: string, otp: string) => {
         const res = await axios.post("/auth/verify-otp",{phone,otp});
         const data = res.data
-      
+        console.log(data)
         setToken(data.token)
-        setUser({phone: data.user.phone, name: data.user.name})
+        setUser({phone: data.user.phone, name: data.user.name, email: data.user.email})
 
         localStorage.setItem("token", data.token)
-        localStorage.setItem("user",JSON.stringify({ phone: data.user.phone, name: data.user.name }))
+        localStorage.setItem("user",JSON.stringify({ phone: data.user.phone, name: data.user.name, email: data.user.email }))
 
         return data.user.name ? "loggedIn" : "newUser"
     }

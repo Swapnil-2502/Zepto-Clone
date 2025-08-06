@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useAuth } from "../../contexts/AuthContext"
+import { toast } from 'react-hot-toast';
 
 
 const AccountProfile = () => {
@@ -27,6 +28,7 @@ const AccountProfile = () => {
     const handleNameEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         updateNameEmail({name,email})
+        toast.success('Submitted successfully!');
     }
 
   return (

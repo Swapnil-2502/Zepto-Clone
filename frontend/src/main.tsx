@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { AuthProvider } from './contexts/AuthContext.tsx'
 import { BrowserRouter } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast';
 
 import '../public/zepto-clone-styles/zepto-style1.css'
 import '../public/zepto-clone-styles/zepto-style2.css'
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <AuthProvider>
         <App />
+        <Toaster position="top-center" toastOptions={{style:{marginTop:'60px'}}} />
       </AuthProvider>
     </BrowserRouter>
     
