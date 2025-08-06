@@ -1,14 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
 export interface Address {
-    saveAddressAs: "Home" | "Work",
-    buildingType: "Society" | "Independent House",
+    saveAddressAs: "Home" | "Work" | "Other",
     blockOrHouseNumber: string,
     streetName?: string,
     landmark?: string,
-    city: string;
-    state: string;
-    pincode: string;
+    receiverName?: string,
+    receiverContact?: string
 }
 
 export interface UserDocument extends Document{
@@ -24,12 +22,7 @@ const AddressSchema: Schema = new Schema<Address>(
     {
         saveAddressAs:{
             type: String,
-            enum: ["Home","Work"],
-            required: true
-        },
-        buildingType:{
-            type:String,
-            enum:["Society","Independent House"],
+            enum: ["Home","Work","Other"],
             required: true
         },
         blockOrHouseNumber:{
@@ -42,20 +35,15 @@ const AddressSchema: Schema = new Schema<Address>(
         landmark:{
             type: String
         },
-        city:{
-            type: String,
-            required: true
+        receiverName:{
+            type: String
         },
-        state:{
-            type: String,
-            required: true
-        },
-        pincode:{
-            type: String,
-            required: true
+        receiverContact:{
+            type: String
         }
+       
     },
-    {_id: false}
+    { _id: true }
 );
 
 const UserSchema: Schema = new Schema<UserDocument>(
