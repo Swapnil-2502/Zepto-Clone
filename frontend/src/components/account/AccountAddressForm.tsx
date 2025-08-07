@@ -31,15 +31,20 @@ const AccountAddressForm: React.FC<AccountAddressFormProps> = ({onClose}) => {
             || (form.saveAddressAs === "Other" && customeLabel !== ""))
         
 
-    const handleSubmit = () => {
-        
-        const data = {
-            ...form,
-            saveAddressAs: form.saveAddressAs as "Other" | "Home" | "Work",
+    const handleSubmit = async(e: React.FormEvent) => {
+        e.preventDefault()
+        if (!isFormComplete) return;
+        try{
+            const data = {
+                ...form,
+                saveAddressAs: form.saveAddressAs as "Other" | "Home" | "Work",
+            }
+            await addAddress(data)
+            onClose();
         }
-        console.log(data)
-        addAddress(data)
-        
+        catch(error){
+            console.error("Failed to add address:", error);
+        }
     }
 
   return (
@@ -78,7 +83,7 @@ const AccountAddressForm: React.FC<AccountAddressFormProps> = ({onClose}) => {
                                                                 <div className="flex items-center justify-center"></div>
                                                             </button>
                                                         </div>
-                                                        <form className="mt-6 mb-20 flex grow flex-col justify-end" onSubmit={(e) => {e.preventDefault(); handleSubmit();}}>
+                                                        <form className="mt-6 mb-20 flex grow flex-col justify-end" onSubmit={(e) => {e.preventDefault(); handleSubmit(e);}}>
                                                             <div className="flex max-h-[28rem] flex-1 flex-col overflow-auto overscroll-y-contain pb-36 sm:max-h-[36rem] sm:pb-72">
                                                                 <h6 className="block font-subtitle text-base tracking-wider mb-2 text-[#13002266]">House No. &amp; Floor*</h6>
                                                                 <div>
@@ -143,7 +148,7 @@ const AccountAddressForm: React.FC<AccountAddressFormProps> = ({onClose}) => {
                                                                                     : "bg-[#7575751a] text-[#75757599] bg-opacity-10 text-opacity-60"
                                                                             }
                                                                         `}
-                                                                    disabled={!isFormComplete} type="submit" aria-label="Submit" onSubmit={handleSubmit}>
+                                                                    disabled={!isFormComplete} type="submit" aria-label="Submit">
                                                                     <div className="flex items-center justify-center">
                                                                         <h4 className="block font-heading text-lg tracking-wide">Save &amp; Continue</h4>
                                                                     </div>

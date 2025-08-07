@@ -1,10 +1,14 @@
 import { useState } from "react"
 import AccountAddressForm from "./AccountAddressForm"
+import AccountSavedAddress from "./AccountSavedAddress"
+import { useAddress } from "../../contexts/AddressContext"
+
 
 
 
 const AccountAddress = () => {
     const [showAddressForm, setshowAddressForm] = useState(false)
+    const {addresses} = useAddress()
 
     const handleCloseForm = ()=> {
         setshowAddressForm(false)
@@ -38,15 +42,37 @@ const AccountAddress = () => {
                 <div className="addresses_addressContainer__B52r5">
                     <h4 className="block font-heading text-lg tracking-wide addresses_savedAddressesTitle__CIKMI" data-testid="saved-location-title">Saved Addresses</h4>
                     <div className="addresses_addressCard__Bygaq">
-                        <div className="addresses_emptyScreen__rqjPI">
-                            <div className="m-auto block w-fit pt-4 ">
-                                <div className="mx-auto block w-fit">
-                                    <img alt="" fetchPriority="low" loading="lazy" width="120" height="120" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/app/images/cone-icon.png" style={{color: "transparent", objectFit: "contain"}}/>
+                        {/* {lengthAddresses === 0 ? (
+                            <div className="addresses_emptyScreen__rqjPI">
+                                <div className="m-auto block w-fit pt-4 ">
+                                    <div className="mx-auto block w-fit">
+                                        <img alt="" fetchPriority="low" loading="lazy" width="120" height="120" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/app/images/cone-icon.png" style={{color: "transparent", objectFit: "contain"}}/>
+                                    </div>
+                                    <h3 className="block font-heading text-xl tracking-wider mt-8 text-center undefined">No Address Added</h3>
+                                    <p className="block font-body text-base mt-3 w-80 text-center undefined">To see the saved address here, add your work or home address</p>
                                 </div>
-                                <h3 className="block font-heading text-xl tracking-wider mt-8 text-center undefined">No Address Added</h3>
-                                <p className="block font-body text-base mt-3 w-80 text-center undefined">To see the saved address here, add your work or home address</p>
                             </div>
-                        </div>
+                        ) : (
+                            addresses.map((address)=>(
+                                <>
+                                    <AccountSavedAddress key={address._id} address={address} />
+                                    <div className="px-4">
+                                        <div className="_divider_29zqs_1"></div>    
+                                    </div>
+                                </>
+                            ))                           
+                        )} */}
+                        {
+                            addresses.map((address)=>(
+                                <>
+                                    <AccountSavedAddress key={address._id} address={address} />
+                                    <div className="px-4">
+                                        <div className="_divider_29zqs_1"></div>    
+                                    </div>
+                                </>
+                            ))    
+                        }
+             
                     </div>
                 </div>
             </div>

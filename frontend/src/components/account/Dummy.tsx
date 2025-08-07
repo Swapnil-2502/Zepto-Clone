@@ -3,123 +3,105 @@
 const Dummy = () => {
   return (
     <>
+       
         <div className="fixed inset-0 z-[99999999] overflow-y-hidden bg-black/70 transition-opacity ease-in">
-            <div className="absolute inset-x-0 bottom-0 sm:static sm:flex sm:min-h-screen sm:items-center sm:justify-center top-0" tabIndex={-1}>
-                <div className="overflow-hidden text-left shadow-xl transition-all sm:my-8 sm:h-full sm:rounded-xl sm:drop-shadow-md static flex h-screen flex-col justify-between rounded-none sm:static" style={{width: "fit-content"}}>
-                    <div className="">
-                        <div className="">
-                            <div className="">
-                                <div className="" id="modal-title"></div>
-                                <div className="">
-                                    <div className="bg-skin-base">
-                                        <div className="sticky z-[1000] flex w-full justify-between bg-skin-base p-3 shadow undefined">
-                                            <button aria-label="Back button" className="sm:hidden">
-                                                <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" style={{height: "1.5rem", width: "1.5rem", color: "black"}}>
-                                                    <path d="M15.5 19L8.5 12L15.5 5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
-                                                </svg>
-                                            </button>
-                                            <p className="block font-heading text-lg tracking-wide w-full pl-2">Add Address Details</p>
-                                            <button aria-label="Location modal close Icon" className="absolute right-2 hidden sm:block">
-                                                <svg fill="none" height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg">
-                                                    <path clip-rule="evenodd" d="M15.75 9C15.75 12.7279 12.7279 15.75 9 15.75C5.27208 15.75 2.25 12.7279 2.25 9C2.25 5.27208 5.27208 2.25 9 2.25C12.7279 2.25 15.75 5.27208 15.75 9ZM5.46967 12.5303C5.17678 12.2374 5.17678 11.7626 5.46967 11.4697L7.93934 9L5.46967 6.53033C5.17678 6.23744 5.17678 5.76256 5.46967 5.46967C5.76256 5.17678 6.23744 5.17678 6.53033 5.46967L9 7.93934L11.4697 5.46967C11.7626 5.17678 12.2374 5.17678 12.5303 5.46967C12.8232 5.76256 12.8232 6.23744 12.5303 6.53033L10.0607 9L12.5303 11.4697C12.8232 11.7626 12.8232 12.2374 12.5303 12.5303C12.2374 12.8232 11.7626 12.8232 11.4697 12.5303L9 10.0607L6.53033 12.5303C6.23744 12.8232 5.76256 12.8232 5.46967 12.5303Z" fill="#130022" fill-opacity="0.4" fill-rule="evenodd"></path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div className="update-address-hoc_modalContainer__QVk59">
-                                            <div className="update-address-hoc_addressDetailsScreen__3XGVF">
-                                                <div className="relative h-full">
-                                                    <div className="px-4">
-                                                        <div className="mb-4 flex flex-row items-center justify-between">
-                                                            <div className="block">
-                                                                <h4 className="block font-heading text-lg tracking-wide">Saved Location</h4>
-                                                            </div>
-                                                            <button className="py-1 px-7 text-base border-skin-primary border text-skin-primary border-none mx-0 mb-0 mt-1 whitespace-nowrap !p-0 font-norms font-semibold" type="button" aria-label="Change">
-                                                                <div className="flex items-center justify-center">Change</div>
-                                                            </button>
-                                                        </div>
-                                                        <div className="rounded-lg bg-[#6D4090] px-4 pb-4 text-skin-base">
-                                                            <div className="flex cursor-pointer items-center pt-4 text-left undefined">
-                                                                    <span className="undefined">
-                                                                        <img alt="location-marker-icon" fetchPriority="low" loading="lazy" width="18" height="19" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.7.0/tr:w-0.2,ar-0.2-0.2,pr-true,f-auto,q-80//images/google-map/location-marker-base-icon.svg" style={{color: "transparent", objectFit: "contain"}}/>
-                                                                    </span>
-                                                                    <div className="ml-4 w-full undefined undefined ">
-                                                                        <div>
-                                                                            <h4 className="font-heading text-lg tracking-wide line-clamp-1 mb-1 break-all capitalize">Dhadiwal Layout</h4>
-                                                                            <p className="font-body text-base line-clamp-1 text-skin-base/80 break-all">Plot no 110, near Sambodhi Buddha Mahavihar &amp; Library, Dhadiwal Layout, पार्वती नगर, नागपूर, महाराष्ट्र 440027, India</p>
-                                                                        </div>
-                                                                    </div>
-                                                            </div>
-                                                        </div>
-                                                        <form className="mt-6 mb-20 flex grow flex-col justify-end">
-                                                            <div className="flex max-h-[28rem] flex-1 flex-col overflow-auto overscroll-y-contain pb-36 sm:max-h-[36rem] sm:pb-72">
-                                                                <h6 className="block font-subtitle text-base tracking-wider mb-2 text-[#13002266]">House No. &amp; Floor*</h6>
-                                                                <div>
-                                                                    <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4 !bg-map">
-                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter details" type="text" value="" name="flatDetails"/>
-                                                                    </div>
-                                                                </div>
-                                                                <h6 className="block font-subtitle text-base tracking-wider mb-2 text-[#13002266]">Building &amp; Block No.*</h6>
-                                                                <div>
-                                                                    <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4 !bg-map">
-                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter details" type="text" value="" name="buildingName"/>
-                                                                    </div>
-                                                                </div>
-                                                                <h6 className="block font-subtitle text-base tracking-wider mb-2 text-[#13002266]">Landmark &amp; Area Name (Optional)</h6>
-                                                                <div>
-                                                                    <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4 !bg-map">
-                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter details" type="text" value="" name="landmark"/>
-                                                                    </div>
-                                                                </div>
-                                                                <h4 className="block font-heading text-lg tracking-wide mb-3 mt-2">Add Address Label</h4>
-                                                                <ul className="inline-flex gap-4 mb-3">
-                                                                    <li className="relative">
-                                                                        <input className="peer sr-only" id="type-Home-radio" test-id="type-Home-radio" type="radio" value="HOME" name="type"/>
-                                                                        <label className="bg-skin-base border-skin-primary-void/20 border-opacity-12 hover:bg-skin-muted peer-checked:bg-skin-primary-darker peer-checked:border-skin-primary-darker text-skin-primary-darker peer-checked:text-skin-base font-norms peer-disabled:bg-skin-base peer-disabled:border-skin-primary-void/10 peer-disabled:text-skin-secondary/60 flex cursor-pointer justify-center rounded-full border px-5 py-1 text-xs focus:outline-none" htmlFor="type-Home-radio">Home</label>
-                                                                    </li>
-                                                                    <li className="relative">
-                                                                        <input className="peer sr-only" id="type-Work-radio" test-id="type-Work-radio" type="radio" value="WORK" name="type"/>
-                                                                        <label className="bg-skin-base border-skin-primary-void/20 border-opacity-12 hover:bg-skin-muted peer-checked:bg-skin-primary-darker peer-checked:border-skin-primary-darker text-skin-primary-darker peer-checked:text-skin-base font-norms peer-disabled:bg-skin-base peer-disabled:border-skin-primary-void/10 peer-disabled:text-skin-secondary/60 flex cursor-pointer justify-center rounded-full border px-5 py-1 text-xs focus:outline-none" htmlFor="type-Work-radio">Work</label>
-                                                                    </li>
-                                                                    <li className="relative">
-                                                                        <input className="peer sr-only" id="type-Other-radio" test-id="type-Other-radio" type="radio" value="OTHER" name="type"/>
-                                                                        <label className="bg-skin-base border-skin-primary-void/20 border-opacity-12 hover:bg-skin-muted peer-checked:bg-skin-primary-darker peer-checked:border-skin-primary-darker text-skin-primary-darker peer-checked:text-skin-base font-norms peer-disabled:bg-skin-base peer-disabled:border-skin-primary-void/10 peer-disabled:text-skin-secondary/60 flex cursor-pointer justify-center rounded-full border px-5 py-1 text-xs focus:outline-none" htmlFor="type-Other-radio">Other</label>
-                                                                    </li>
-                                                                </ul>
-                                                                <h4 className="block font-heading text-lg tracking-wide mb-3 mt-2">Receiver Details</h4>
-                                                                <div>
-                                                                    <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4 !bg-map">
-                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="" type="text" value="" name="contactName"/>
-                                                                    </div>
-                                                                </div>
-                                                                <div>
-                                                                    <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4 !bg-map">
-                                                                        <span className="left-0 pl-3.5"><span>+91</span></span>
-                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="" type="tel" value="" name="contactNumber"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="absolute inset-x-0 bottom-8 bg-skin-base p-4 pb-8 sm:bottom-0 sm:pb-4">
-                                                                <button className=" px-7 text-base border-skin-primary border bg-opacity-10 text-opacity-60 rounded-md w-full border-none !py-3.5 bg-[#7575751a] text-[#75757599]" disabled={true} type="submit" aria-label="Submit">
-                                                                    <div className="flex items-center justify-center">
-                                                                        <h4 className="block font-heading text-lg tracking-wide">Save &amp; Continue</h4>
-                                                                    </div>
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+            <div className="absolute inset-x-0 bottom-0 sm:static sm:flex sm:min-h-screen sm:items-center sm:justify-center" tabIndex={-1}>
+                <div className="relative h-full overflow-hidden rounded-t-3xl text-left shadow-xl transition-all sm:my-8 sm:h-full sm:rounded-xl sm:drop-shadow-md" style={{width: "fit-content"}}>
+                    <div className="max-h-[calc(100vh-128px)] overflow-y-scroll bg-white px-4 pt-5 pb-4 sm:max-h-full sm:overflow-auto sm:p-6 sm:pb-4">
+                        <div className="sm:items-start">
+                            <div className="mt-3 text-center sm:mt-0 sm:text-left">
+                                <div className="text-lg font-medium leading-6 text-gray-900" id="modal-title"></div>
+                                <div className="mt-2">
+                                    <div className="addresses_confirmDeleteText__CuT4i">
+                                        <h3 className="block font-heading text-xl tracking-wider">Are you sure you want to delete this address?</h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className="addresses_deleteFooter__QMidJ">
+                        <button className=" px-7 text-base border-skin-primary border bg-skin-primary text-skin-base  tracking-widest mr-2 flex-1 !rounded-lg !py-3 !font-bold" type="button" aria-label="Delete">
+                            <div className="flex items-center justify-center">Delete</div>
+                        </button>
+                        <button className="px-7 text-base border-skin-primary border bg-skin-muted-dark bg-opacity-10 text-skin-muted-dark text-opacity-60 ml-2 flex-1 !rounded-lg !border-skin-primary-void/10 !py-3 !font-bold" type="button" aria-label="Cancel">
+                            <div className="flex items-center justify-center">Cancel</div>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
+        
     </>
   )
 }
 
 export default Dummy
+
+// import React, { createContext, useContext, useState } from "react";
+// import axios from "axios";
+// import { useAuth } from "./authContext"; // if you need the token
+
+// type Address = {
+//   _id: string;
+//   saveAddressAs: "Home" | "Work" | "Other";
+//   blockOrHouseNumber: string;
+//   streetName?: string;
+//   landmark?: string;
+//   receiverName?: string;
+//   receiverContact?: string;
+// };
+
+// type AddressContextType = {
+//   addresses: Address[];
+//   fetchAddresses: () => Promise<void>;
+//   addAddress: (data: Omit<Address, "_id">) => Promise<void>;
+//   updateAddress: (id: string, data: Partial<Omit<Address, "_id">>) => Promise<void>;
+//   deleteAddress: (id: string) => Promise<void>;
+// };
+
+// const AddressContext = createContext<AddressContextType | undefined>(undefined);
+
+// export const AddressProvider = ({ children }: { children: React.ReactNode }) => {
+//   const [addresses, setAddresses] = useState<Address[]>([]);
+//   const { token } = useAuth(); // if token is needed for API auth
+
+//   const headers = {
+//     Authorization: `Bearer ${token}`,
+//   };
+
+//   const fetchAddresses = async () => {
+//     const res = await axios.get("/api/user/addresses", { headers });
+//     setAddresses(res.data.addresses);
+//   };
+
+//   const addAddress = async (data: Omit<Address, "_id">) => {
+//     const res = await axios.post("/api/user/addresses", data, { headers });
+//     setAddresses(res.data.user.addresses); // or refetch all
+//   };
+
+//   const updateAddress = async (id: string, data: Partial<Omit<Address, "_id">>) => {
+//     const res = await axios.put(`/api/user/addresses/${id}`, data, { headers });
+//     setAddresses(res.data.user.addresses); // or refetch all
+//   };
+
+//   const deleteAddress = async (id: string) => {
+//     const res = await axios.delete(`/api/user/addresses/${id}`, { headers });
+//     setAddresses(res.data.user.addresses); // or refetch all
+//   };
+
+//   return (
+//     <AddressContext.Provider
+//       value={{ addresses, fetchAddresses, addAddress, updateAddress, deleteAddress }}
+//     >
+//       {children}
+//     </AddressContext.Provider>
+//   );
+// };
+
+// export const useAddress = () => {
+//   const context = useContext(AddressContext);
+//   if (!context) {
+//     throw new Error("useAddress must be used within AddressProvider");
+//   }
+//   return context;
+// };
