@@ -2,8 +2,8 @@ import mongoose, { Schema } from "mongoose";
 
 export interface Address {
     saveAddressAs: "Home" | "Work" | "Other",
-    blockOrHouseNumber: string,
-    streetName?: string,
+    HouseNumber: string,
+    BlockNumber: string,
     landmark?: string,
     receiverName?: string,
     receiverContact?: string
@@ -25,12 +25,13 @@ const AddressSchema: Schema = new Schema<Address>(
             enum: ["Home","Work","Other"],
             required: true
         },
-        blockOrHouseNumber:{
+        HouseNumber:{
             type:String,
             required: true
         },
-        streetName:{
-            type: String
+        BlockNumber:{
+            type: String,
+            required: true
         },
         landmark:{
             type: String
