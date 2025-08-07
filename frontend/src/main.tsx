@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { AuthProvider } from './contexts/AuthContext.tsx'
+import { AddressProvider } from './contexts/AddressContext.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 
@@ -18,7 +19,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <AddressProvider>
+          <App />
+        </AddressProvider>
         <Toaster position="top-center" toastOptions={{style:{marginTop:'60px'}}} />
       </AuthProvider>
     </BrowserRouter>

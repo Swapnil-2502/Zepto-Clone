@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useAddress } from "../../contexts/AddressContext";
 
 
 interface AccountAddressFormProps {
@@ -5,7 +7,41 @@ interface AccountAddressFormProps {
 }
 
 const AccountAddressForm: React.FC<AccountAddressFormProps> = ({onClose}) => {
-    
+    const [selectedType, setSelectedType] = useState<string>("");
+    const {addAddress} = useAddress()
+
+    const [form, setForm] = useState({
+        saveAddressAs: "",
+        HouseNumber: "",
+        BlockNumber: "",
+        landmark: "",
+        receiverName: "",
+        receiverContact: "",
+    })
+
+    const [customeLabel, setCustomLabel] = useState("")
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target
+        setForm((prev) => ({...prev, [name]: value}))
+    }
+
+    const isFormComplete = form.HouseNumber.trim() !== "" && form.BlockNumber.trim() !== "" 
+        && ((form.saveAddressAs !== "Other" && form.saveAddressAs !== "") 
+            || (form.saveAddressAs === "Other" && customeLabel !== ""))
+        
+
+    const handleSubmit = () => {
+        
+        const data = {
+            ...form,
+            saveAddressAs: form.saveAddressAs as "Other" | "Home" | "Work",
+        }
+        console.log(data)
+        addAddress(data)
+        
+    }
+
   return (
     <>
         <div className="fixed inset-0 z-[99999999] overflow-y-hidden bg-black/70 transition-opacity ease-in">
@@ -42,61 +78,78 @@ const AccountAddressForm: React.FC<AccountAddressFormProps> = ({onClose}) => {
                                                                 <div className="flex items-center justify-center"></div>
                                                             </button>
                                                         </div>
-                                                        <form className="mt-6 mb-20 flex grow flex-col justify-end">
+                                                        <form className="mt-6 mb-20 flex grow flex-col justify-end" onSubmit={(e) => {e.preventDefault(); handleSubmit();}}>
                                                             <div className="flex max-h-[28rem] flex-1 flex-col overflow-auto overscroll-y-contain pb-36 sm:max-h-[36rem] sm:pb-72">
                                                                 <h6 className="block font-subtitle text-base tracking-wider mb-2 text-[#13002266]">House No. &amp; Floor*</h6>
                                                                 <div>
                                                                     <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4 !bg-map">
-                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter details" type="text" value="" name="flatDetails"/>
+                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter details" type="text" value={form.HouseNumber} onChange={handleChange} name="HouseNumber"/>
                                                                     </div>
                                                                 </div>
                                                                 <h6 className="block font-subtitle text-base tracking-wider mb-2 text-[#13002266]">Building &amp; Block No.*</h6>
                                                                 <div>
                                                                     <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4 !bg-map">
-                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter details" type="text" value="" name="buildingName"/>
+                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter details" type="text" value={form.BlockNumber} onChange={handleChange} name="BlockNumber"/>
                                                                     </div>
                                                                 </div>
                                                                 <h6 className="block font-subtitle text-base tracking-wider mb-2 text-[#13002266]">Landmark &amp; Area Name (Optional)</h6>
                                                                 <div>
                                                                     <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4 !bg-map">
-                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter details" type="text" value="" name="landmark"/>
+                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter details" type="text" value={form.landmark} onChange={handleChange} name="landmark"/>
                                                                     </div>
                                                                 </div>
                                                                 <h4 className="block font-heading text-lg tracking-wide mb-3 mt-2">Add Address Label</h4>
                                                                 <ul className="inline-flex gap-4 mb-3">
                                                                     <li className="relative">
-                                                                        <input className="peer sr-only" id="type-Home-radio" test-id="type-Home-radio" type="radio" value="HOME" name="type"/>
+                                                                        <input className="peer sr-only" id="type-Home-radio" test-id="type-Home-radio" type="radio" value="Home" name="saveAddressAs" onChange={(e) => { setSelectedType("Home"); handleChange(e); }}/>
                                                                         <label className="bg-skin-base border-skin-primary-void/20 border-opacity-12 hover:bg-skin-muted peer-checked:bg-skin-primary-darker peer-checked:border-skin-primary-darker text-skin-primary-darker peer-checked:text-skin-base font-norms peer-disabled:bg-skin-base peer-disabled:border-skin-primary-void/10 peer-disabled:text-skin-secondary/60 flex cursor-pointer justify-center rounded-full border px-5 py-1 text-xs focus:outline-none" htmlFor="type-Home-radio">Home</label>
                                                                     </li>
                                                                     <li className="relative">
-                                                                        <input className="peer sr-only" id="type-Work-radio" test-id="type-Work-radio" type="radio" value="WORK" name="type"/>
+                                                                        <input className="peer sr-only" id="type-Work-radio" test-id="type-Work-radio" type="radio" value="Work" name="saveAddressAs" onChange={(e) => {setSelectedType("Work"); handleChange(e); }}/>
                                                                         <label className="bg-skin-base border-skin-primary-void/20 border-opacity-12 hover:bg-skin-muted peer-checked:bg-skin-primary-darker peer-checked:border-skin-primary-darker text-skin-primary-darker peer-checked:text-skin-base font-norms peer-disabled:bg-skin-base peer-disabled:border-skin-primary-void/10 peer-disabled:text-skin-secondary/60 flex cursor-pointer justify-center rounded-full border px-5 py-1 text-xs focus:outline-none" htmlFor="type-Work-radio">Work</label>
                                                                     </li>
                                                                     <li className="relative">
-                                                                        <input className="peer sr-only" id="type-Other-radio" test-id="type-Other-radio" type="radio" value="OTHER" name="type"/>
+                                                                        <input className="peer sr-only" id="type-Other-radio" test-id="type-Other-radio" type="radio" value="Other" name="saveAddressAs" onChange={(e) => {setSelectedType("Other"); handleChange(e); }}/>
                                                                         <label className="bg-skin-base border-skin-primary-void/20 border-opacity-12 hover:bg-skin-muted peer-checked:bg-skin-primary-darker peer-checked:border-skin-primary-darker text-skin-primary-darker peer-checked:text-skin-base font-norms peer-disabled:bg-skin-base peer-disabled:border-skin-primary-void/10 peer-disabled:text-skin-secondary/60 flex cursor-pointer justify-center rounded-full border px-5 py-1 text-xs focus:outline-none" htmlFor="type-Other-radio">Other</label>
                                                                     </li>
                                                                 </ul>
+                                                                {selectedType === "Other" && (
+                                                                    <div>
+                                                                        <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4 !bg-map">
+                                                                            <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter your own label" type="text" value={customeLabel} onChange={(e)=>setCustomLabel(e.target.value)} name="cutomlabel"/>
+                                                                        </div>
+                                                                    </div>
+                                                                )}
                                                                 <h4 className="block font-heading text-lg tracking-wide mb-3 mt-2">Receiver Details</h4>
                                                                 <div>
                                                                     <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4 !bg-map">
-                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="" type="text" value="" name="contactName"/>
+                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter receiver's Name" type="text" value={form.receiverName} onChange={handleChange} name="receiverName"/>
                                                                     </div>
                                                                 </div>
                                                                 <div>
                                                                     <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4 !bg-map">
                                                                         <span className="left-0 pl-3.5"><span>+91</span></span>
-                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="" type="tel" value="" name="contactNumber"/>
+                                                                        <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Enter receiver's Phone Number" type="tel" value={form.receiverContact} onChange={handleChange} name="receiverContact" maxLength={10} pattern="\d{10}"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                
                                                             <div className="absolute inset-x-0 bottom-8 bg-skin-base p-4 pb-8 sm:bottom-0 sm:pb-4">
-                                                                <button className=" px-7 text-base border-skin-primary border bg-opacity-10 text-opacity-60 rounded-md w-full border-none !py-3.5 bg-[#7575751a] text-[#75757599]" disabled={true} type="submit" aria-label="Submit">
+                                                                <button 
+                                                                    className = {`px-7 text-base rounded-md w-full border-none !py-3.5 tracking-widest cursor-pointer
+                                                                            ${
+                                                                                isFormComplete
+                                                                                    ? "bg-skin-primary text-skin-base border-skin-primary py-1 bg-[#ef4372] text-white"
+                                                                                    : "bg-[#7575751a] text-[#75757599] bg-opacity-10 text-opacity-60"
+                                                                            }
+                                                                        `}
+                                                                    disabled={!isFormComplete} type="submit" aria-label="Submit" onSubmit={handleSubmit}>
                                                                     <div className="flex items-center justify-center">
                                                                         <h4 className="block font-heading text-lg tracking-wide">Save &amp; Continue</h4>
                                                                     </div>
                                                                 </button>
                                                             </div>
+                                                        
                                                         </form>
                                                     </div>
                                                 </div>

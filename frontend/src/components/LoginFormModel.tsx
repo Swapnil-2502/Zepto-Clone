@@ -12,20 +12,20 @@ interface LoginFormModalProps {
 
 const LoginFormModel:React.FC<LoginFormModalProps> = ({isOpen,onClose}) => {
 
-
-    if (!isOpen) return null;
-
     useEffect(()=>{
-        document.body.style.overflow = "hidden"
-
-        return () => {
-             document.body.style.overflow = ""
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
         }
-    },[])
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isOpen]);
 
     const [step, setStep] = useState<1 | 2 | 3>(1);
     const [phoneNumber, setPhoneNumber] = useState("")
     const {loginUser, addName} = useAuth()
+
+    if (!isOpen) return null;
 
     const handleContinuePhone = (phone: string) => {
         setPhoneNumber(phone)
