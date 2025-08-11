@@ -42,7 +42,7 @@ const AccountAddress = () => {
                 <div className="addresses_addressContainer__B52r5">
                     <h4 className="block font-heading text-lg tracking-wide addresses_savedAddressesTitle__CIKMI" data-testid="saved-location-title">Saved Addresses</h4>
                     <div className="addresses_addressCard__Bygaq">
-                        {/* {lengthAddresses === 0 ? (
+                        {addresses.length === 0 ? (
                             <div className="addresses_emptyScreen__rqjPI">
                                 <div className="m-auto block w-fit pt-4 ">
                                     <div className="mx-auto block w-fit">
@@ -61,18 +61,7 @@ const AccountAddress = () => {
                                     </div>
                                 </>
                             ))                           
-                        )} */}
-                        {
-                            addresses.map((address)=>(
-                                <>
-                                    <AccountSavedAddress key={address._id} address={address} />
-                                    <div className="px-4">
-                                        <div className="_divider_29zqs_1"></div>    
-                                    </div>
-                                </>
-                            ))    
-                        }
-             
+                        )}
                     </div>
                 </div>
             </div>
