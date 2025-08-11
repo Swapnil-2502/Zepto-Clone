@@ -28,7 +28,7 @@ export const addAddress = async (req: AuthRequest, res: Response) =>{
         user.addresses.push(newAddress)
         await user.save()
 
-        return res.status(200).json({ message: "Address added successfully.", user });
+        return res.status(200).json({ message: "Address added successfully.", addresses: user.addresses });
     }
     catch(error){
         console.error("Error adding address:", error);
@@ -51,7 +51,7 @@ export const updateAddress = async (req: AuthRequest, res: Response) => {
         Object.assign(address,updatedAddress)
         await user.save();
 
-        return res.status(200).json({ message: "Address updated successfully.", user });
+        return res.status(200).json({ message: "Address updated successfully.", addresses: user.addresses  });
     }
     catch(error){
         console.error("Error updating address:", error);
@@ -73,7 +73,7 @@ export const deleteAddress = async (req: AuthRequest, res: Response) => {
         user.addresses.splice(addressIndex, 1);
         await user.save();
 
-        return res.status(200).json({ message: "Address deleted successfully.", user });
+        return res.status(200).json({ message: "Address deleted successfully.", addresses: user.addresses });
     }
     catch(error){
         console.error("Error updating address:", error);
