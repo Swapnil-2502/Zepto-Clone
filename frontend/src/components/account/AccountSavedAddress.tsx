@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAddress } from "../../contexts/AddressContext";
+import AccountAddressForm from "./AccountAddressForm";
 
 type Address = {
     saveAddressAs: string;
@@ -18,11 +19,11 @@ type Props = {
 const AccountSavedAddress = ({address}: Props) => {
     const { saveAddressAs, HouseNumber, BlockNumber, landmark } = address;
     const [showForm, setShowForm] = useState(false)
+    const [isAddressForm, setisAddressForm] = useState(false)
     const {deleteAddress} = useAddress();
 
     const handleDelete = async (id:string) =>{
         await deleteAddress(id);
-
     }
 
   return (
@@ -30,7 +31,9 @@ const AccountSavedAddress = ({address}: Props) => {
         <div className="_list-item_18zsn_1 ">
             <div className="_list-item-left-container_18zsn_15">
                 <div className="_list-item-prefix-icon_18zsn_84">
-                    <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://www.zeptonow.com/images/home.svg" style={{color: "transparent", objectFit: "contain"}}/>
+                    {address.saveAddressAs === "Home" ? <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://www.zeptonow.com/images/home.svg" style={{color: "transparent", objectFit: "contain"}}/> : null}
+                    {address.saveAddressAs === "Work" ? <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://www.zeptonow.com/images/briefcase.svg" style={{color: "transparent", objectFit: "contain"}}/> : null}
+                    {address.saveAddressAs === "Other" ? <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://www.zeptonow.com/images/location.svg" style={{color: "transparent", objectFit: "contain"}}/> : null}
                 </div>
                 <div className="_list-item-text-container_18zsn_23">
                     <div className="_list-item-title-section_18zsn_31">
@@ -41,7 +44,7 @@ const AccountSavedAddress = ({address}: Props) => {
                     </div>
                 </div>
             </div>
-            <div className="flex cursor-pointer items-center self-stretch p-1.5">
+            <div className="flex cursor-pointer items-center self-stretch p-1.5" onClick={()=>setisAddressForm(true)}>
                 <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                     <g opacity="0.6">
                         <mask fill="black" height="19" id="path-1-outside-1_25003_9309" maskUnits="userSpaceOnUse" width="19" x="2" y="3">
@@ -65,31 +68,41 @@ const AccountSavedAddress = ({address}: Props) => {
         </div>
         {showForm && (
             <div className="fixed inset-0 z-[99999999] overflow-y-hidden bg-black/70 transition-opacity ease-in">
-            <div className="absolute inset-x-0 bottom-0 sm:static sm:flex sm:min-h-screen sm:items-center sm:justify-center" tabIndex={-1}>
-                <div className="relative h-full overflow-hidden rounded-t-3xl text-left shadow-xl transition-all sm:my-8 sm:h-full sm:rounded-xl sm:drop-shadow-md" style={{width: "fit-content"}}>
-                    <div className="max-h-[calc(100vh-128px)] overflow-y-scroll bg-white px-4 pt-5 pb-4 sm:max-h-full sm:overflow-auto sm:p-6 sm:pb-4">
-                        <div className="sm:items-start">
-                            <div className="mt-3 text-center sm:mt-0 sm:text-left">
-                                <div className="text-lg font-medium leading-6 text-gray-900" id="modal-title"></div>
-                                <div className="mt-2">
-                                    <div className="addresses_confirmDeleteText__CuT4i">
-                                        <h3 className="block font-heading text-xl tracking-wider">Are you sure you want to delete this address?</h3>
+                <div className="absolute inset-x-0 bottom-0 sm:static sm:flex sm:min-h-screen sm:items-center sm:justify-center" tabIndex={-1}>
+                    <div className="relative h-full overflow-hidden rounded-t-3xl text-left shadow-xl transition-all sm:my-8 sm:h-full sm:rounded-xl sm:drop-shadow-md" style={{width: "fit-content"}}>
+                        <div className="max-h-[calc(100vh-128px)] overflow-y-scroll bg-white px-4 pt-5 pb-4 sm:max-h-full sm:overflow-auto sm:p-6 sm:pb-4">
+                            <div className="sm:items-start">
+                                <div className="mt-3 text-center sm:mt-0 sm:text-left">
+                                    <div className="text-lg font-medium leading-6 text-gray-900" id="modal-title"></div>
+                                    <div className="mt-2">
+                                        <div className="addresses_confirmDeleteText__CuT4i">
+                                            <h3 className="block font-heading text-xl tracking-wider">Are you sure you want to delete this address?</h3>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="addresses_deleteFooter__QMidJ">
-                        <button className=" px-7 text-base border-skin-primary border bg-skin-primary text-skin-base  tracking-widest mr-2 flex-1 !rounded-lg !py-3 !font-bold" type="button" aria-label="Delete">
-                            <div className="flex items-center justify-center" onClick={() => handleDelete(address._id)}>Delete</div>
-                        </button>
-                        <button className="px-7 text-base border-skin-primary border bg-skin-muted-dark bg-opacity-10 text-skin-muted-dark text-opacity-60 ml-2 flex-1 !rounded-lg !border-skin-primary-void/10 !py-3 !font-bold" type="button" aria-label="Cancel">
-                            <div className="flex items-center justify-center" onClick={() => setShowForm(false)}>Cancel</div>
-                        </button>
+                        <div className="addresses_deleteFooter__QMidJ">
+                            <button className=" px-7 text-base border-skin-primary border bg-skin-primary text-skin-base  tracking-widest mr-2 flex-1 !rounded-lg !py-3 !font-bold" type="button" aria-label="Delete">
+                                <div className="flex items-center justify-center" onClick={() => handleDelete(address._id)}>Delete</div>
+                            </button>
+                            <button className="px-7 text-base border-skin-primary border bg-skin-muted-dark bg-opacity-10 text-skin-muted-dark text-opacity-60 ml-2 flex-1 !rounded-lg !border-skin-primary-void/10 !py-3 !font-bold" type="button" aria-label="Cancel">
+                                <div className="flex items-center justify-center" onClick={() => setShowForm(false)}>Cancel</div>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        )}
+
+        {isAddressForm && (
+            <AccountAddressForm 
+                onClose={()=>{
+                    setisAddressForm(false)
+                }}
+                initialData = {address}
+                addressId = {address._id}
+            />
         )}
     </>
   )

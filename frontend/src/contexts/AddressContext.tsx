@@ -17,7 +17,8 @@ type AddressContextType = {
     addresses: Address[];
     fetchAddresses: () => Promise<void>;
     addAddress: (data: Omit<Address, "_id">)=> Promise<void>;
-    deleteAddress: (id: string) => Promise<void>
+    updateAddress: (id: string, data: Omit<Address, "_id">) => Promise<void>;
+    deleteAddress: (id: string) => Promise<void>;
 }
 
 const AddressContext = createContext<AddressContextType | undefined>(undefined);
@@ -53,6 +54,11 @@ export const AddressProvider = ({children}: {children: React.ReactNode }) => {
         setAddress(res.data.addresses)
     }
 
+    const updateAddress = async (id: string, data: Omit<Address, "_id">) => {
+        const res = await axios.put(`/user/addresses/${id}`,data,{headers})
+        setAddress(res.data.addresses)
+    }
+
     const deleteAddress = async (id:string) => {
         const res = await axios.delete(`/user/addresses/${id}`,{headers})
         setAddress(res.data.addresses)
@@ -60,7 +66,7 @@ export const AddressProvider = ({children}: {children: React.ReactNode }) => {
 
 
     return (
-        <AddressContext.Provider value={{addresses: address,addAddress, fetchAddresses, deleteAddress}}>
+        <AddressContext.Provider value={{addresses: address,addAddress, fetchAddresses, deleteAddress, updateAddress}}>
             {children}
         </AddressContext.Provider>
     )

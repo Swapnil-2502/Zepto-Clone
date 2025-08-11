@@ -1,22 +1,33 @@
 import { useState } from "react";
 import { useAddress } from "../../contexts/AddressContext";
 
+type Address = {
+    saveAddressAs: string;
+    HouseNumber: string;
+    BlockNumber: string;
+    landmark?: string;
+    receiverName?: string;
+    receiverContact?: string;
+    _id: string;
+}
 
 interface AccountAddressFormProps {
   onClose: () => void;
+  initialData?: Address | null;
+  addressId?: string;
 }
 
-const AccountAddressForm: React.FC<AccountAddressFormProps> = ({onClose}) => {
+const AccountAddressForm: React.FC<AccountAddressFormProps> = ({onClose,initialData,addressId}) => {
     const [selectedType, setSelectedType] = useState<string>("");
-    const {addAddress} = useAddress()
-
+    const {addAddress, updateAddress} = useAddress()
+   
     const [form, setForm] = useState({
-        saveAddressAs: "",
-        HouseNumber: "",
-        BlockNumber: "",
-        landmark: "",
-        receiverName: "",
-        receiverContact: "",
+        saveAddressAs: initialData?.saveAddressAs || "",
+        HouseNumber: initialData?.HouseNumber || "",
+        BlockNumber: initialData?.BlockNumber || "",
+        landmark: initialData?.landmark || "",
+        receiverName: initialData?.receiverName || "",
+        receiverContact: initialData?.receiverContact || "",
     })
 
     const [customeLabel, setCustomLabel] = useState("")
@@ -39,7 +50,13 @@ const AccountAddressForm: React.FC<AccountAddressFormProps> = ({onClose}) => {
                 ...form,
                 saveAddressAs: form.saveAddressAs as "Other" | "Home" | "Work",
             }
-            await addAddress(data)
+            if(addressId){
+                await updateAddress(addressId,data)
+            }
+            else{
+                await addAddress(data)
+            }
+           
             onClose();
         }
         catch(error){
