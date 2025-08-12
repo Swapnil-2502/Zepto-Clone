@@ -1,9 +1,10 @@
+import Navbar from "../components/header/Navbar"
 
 function Home() {
 
   return (
     <>
-        
+        <Navbar />
     </>
   )
 }

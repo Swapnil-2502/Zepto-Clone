@@ -3,9 +3,23 @@ import React, { useState } from "react";
 import LoginFormModel from "./LoginFormModel";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import SelectLocation from "./header/SelectLocation";
+
+type Address = {
+    saveAddressAs: string;
+    HouseNumber: string;
+    BlockNumber: string;
+    landmark?: string;
+    receiverName?: string;
+    receiverContact?: string;
+    _id: string;
+}
+
 
 const Header: React.FC = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [addressModel, setAddressModel] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null)
   const {user} = useAuth()
 
   const navigate = useNavigate();
@@ -36,43 +50,70 @@ const Header: React.FC = () => {
             />
           </a>
 
-          {/* Super Saver Button */}
-          <div>
-            <button className="w-full">
-              <div className="h-[44px] rounded-full border border-gray-200 py-1 px-[5px] w-[120px]">
-                <div className="relative flex h-full w-full cursor-pointer items-center rounded-full p-0.5 transition-all bg-slate-300">
-                  <div className="absolute h-8 w-8 rounded-full shadow-md transition-transform duration-[0.5s] ease-in-out translate-x-0 bg-white">
-                  </div>
-                    <img alt="super-saver" fetchPriority="low" loading="lazy" width="44" height="26" decoding="async" data-nimg="1" className="overflow-hidden !absolute h-[26px] w-11 left-10" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
-                    srcSet="" src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.4.1/images/super-saver/super-saver-inactive.svg" 
-                    style={{color: "transparent", objectFit: "contain"}} />
-                </div>
-              </div>
-            </button>
-          </div>
+          
 
-          {/* Select Location */}
-          <div className="relative flex h-11 flex-1 flex-col justify-center lg:flex-initial">
-            <button
-              aria-haspopup="dialog"
-              aria-label="Select Location"
-              className="flex items-center gap-x-2 text-sm font-semibold"
-              type="button"
-            >
-              <span className="max-w-[170px] gap-x-2 truncate lg:max-w-[250px] xs:max-w-[200px]" style={{ color: "black" }}>
-                <span>Select Location</span>
-              </span>
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                viewBox="0 0 24 24"
-                className="w-4 h-4"
-              >
-                <path d="M19.5 8.25l-7.5 7.5-7.5-7.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-          </div>
+         
+          {
+            selectedAddress ? (
+                <div className="relative flex h-11 flex-1 flex-col justify-center lg:flex-initial">
+                    <span className="flex items-center gap-x-1 text-xl font-bold" data-testid="delivery-time">
+                        <span style={{color: "black"}}></span>
+                        <span className="font-extrabold" style={{color: "#ef4372"}}>6 minutes</span>
+                    </span>
+                    <button aria-haspopup="dialog" aria-label="home" className="flex items-center gap-x-2 text-sm font-semibold" type="button" onClick={() => setAddressModel(true)}>
+                        <span className="max-w-[170px] gap-x-2 truncate lg:max-w-[250px] xs:max-w-[200px]" data-testid="user-address" style={{color: "black"}}>
+                            <span className="capitalize">{selectedAddress.saveAddressAs} - </span>
+                            <span className="">{selectedAddress.HouseNumber} {selectedAddress.BlockNumber} {selectedAddress.landmark}</span>
+                        </span>
+                        <svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style={{height: "16px", width: "16px", color: "black"}}>
+                            <path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                </div>       
+            ):(
+                
+                <>
+                {/* Super Saver Button */}
+                <div>
+                  <button className="w-full">
+                    <div className="h-[44px] rounded-full border border-gray-200 py-1 px-[5px] w-[120px]">
+                      <div className="relative flex h-full w-full cursor-pointer items-center rounded-full p-0.5 transition-all bg-slate-300">
+                        <div className="absolute h-8 w-8 rounded-full shadow-md transition-transform duration-[0.5s] ease-in-out translate-x-0 bg-white">
+                        </div>
+                          <img alt="super-saver" fetchPriority="low" loading="lazy" width="44" height="26" decoding="async" data-nimg="1" className="overflow-hidden !absolute h-[26px] w-11 left-10" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+                          srcSet="" src="https://cdn.zeptonow.com/web-static-assets-prod/artifacts/13.4.1/images/super-saver/super-saver-inactive.svg" 
+                          style={{color: "transparent", objectFit: "contain"}} />
+                      </div>
+                    </div>
+                  </button>
+                </div>
+                {/* Select Location */}
+                <div className="relative flex h-11 flex-1 flex-col justify-center lg:flex-initial">
+                  <button
+                    aria-haspopup="dialog"
+                    aria-label="Select Location"
+                    className="flex items-center gap-x-2 text-sm font-semibold"
+                    type="button"
+                    onClick={() => setAddressModel(true)}
+                  >
+                    <span className="max-w-[170px] gap-x-2 truncate lg:max-w-[250px] xs:max-w-[200px]" style={{ color: "black" }}>
+                      <span>Select Location</span>
+                    </span>
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      viewBox="0 0 24 24"
+                      className="w-4 h-4"
+                    >
+                      <path d="M19.5 8.25l-7.5 7.5-7.5-7.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                </div>
+                </>
+            )
+          }
+          
 
           {/* Search */}
           <div className="inline-block flex-1">
@@ -156,6 +197,15 @@ const Header: React.FC = () => {
         
       </header>
       <LoginFormModel isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+      {addressModel && (
+        <SelectLocation 
+          onClose={() => setAddressModel(false)}  
+          onAddressSelect={(address) => {
+            setSelectedAddress(address);
+            setAddressModel(false);}
+          }
+        />
+      )}
     </>
     
   );

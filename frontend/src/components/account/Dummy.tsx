@@ -4,32 +4,67 @@ const Dummy = () => {
   return (
     <>
        
-        <div className="fixed inset-0 z-[99999999] overflow-y-hidden bg-black/70 transition-opacity ease-in">
-            <div className="absolute inset-x-0 bottom-0 sm:static sm:flex sm:min-h-screen sm:items-center sm:justify-center" tabIndex={-1}>
-                <div className="relative h-full overflow-hidden rounded-t-3xl text-left shadow-xl transition-all sm:my-8 sm:h-full sm:rounded-xl sm:drop-shadow-md" style={{width: "fit-content"}}>
-                    <div className="max-h-[calc(100vh-128px)] overflow-y-scroll bg-white px-4 pt-5 pb-4 sm:max-h-full sm:overflow-auto sm:p-6 sm:pb-4">
-                        <div className="sm:items-start">
-                            <div className="mt-3 text-center sm:mt-0 sm:text-left">
-                                <div className="text-lg font-medium leading-6 text-gray-900" id="modal-title"></div>
-                                <div className="mt-2">
-                                    <div className="addresses_confirmDeleteText__CuT4i">
-                                        <h3 className="block font-heading text-xl tracking-wider">Are you sure you want to delete this address?</h3>
-                                    </div>
-                                </div>
+    <div className="sticky top-[68px] left-0 z-[101] w-full bg-white pt-2 lg:top-[86px] xl:pt-4">
+        <div className="max-w-full overflow-x-scroll" id="outer-container">
+            <div className="mx-auto max-w-7xl relative" id="above-list-container">
+                <div>
+                    <section className="embla">
+                        <div className="embla__viewport">
+                            <div className="embla__container" style={{transform: "translate3d(0px, 0px, 0px)"}}>
+                                <button className="relative flex items-center gap-1 px-1 shrink-0 pb-3">
+                                    <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/inventory/banner/a767cf6e-9113-409b-b5ab-ac0d22a7db58.png" style={{color: "transparent", objectFit: "contain", flexShrink: 0}}/>
+                                    <span className="shrink-0 text-lg font-medium leading-5 text-[#9A16CA]">All</span>
+                                    <div className="absolute bottom-0 h-[3px] w-full bg-[#9A16CA] transition-transform duration-300" style={{borderTopLeftRadius: "4px", borderTopRightRadius: "4px", opacity: "0"}}></div>
+                                </button>
+                                <button className="relative flex items-center gap-1 px-1 shrink-0 pb-3">
+                                    <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/inventory/banner/e8abccfb-64fe-4249-84d3-426eccf01e23.png" style={{color: "transparent", objectFit: "contain", flexShrink: 0}}/>
+                                    <span className="shrink-0 text-lg font-medium leading-5 text-[#586274]">Cafe</span>
+                                    <div className="absolute bottom-0 h-[3px] w-full bg-[#9A16CA] transition-transform duration-300" style={{borderTopLeftRadius: "4px", borderTopRightRadius: "4px", opacity: "0"}}></div>
+                                </button>
+                                <button className="relative flex items-center gap-1 px-1 shrink-0 pb-3">
+                                    <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/inventory/banner/be82f78d-d993-4838-9f4a-4c64cd387126.png" style={{color: "transparent", objectFit: "contain", flexShrink: 0}}/>
+                                    <span className="shrink-0 text-lg font-medium leading-5 text-[#586274]">Home</span>
+                                    <div className="absolute bottom-0 h-[3px] w-full bg-[#9A16CA] transition-transform duration-300" style={{borderTopLeftRadius: "4px", borderTopRightRadius: "4px", opacity: "0"}}></div>
+                                </button>
+                                <button className="relative flex items-center gap-1 px-1 shrink-0 pb-3">
+                                    <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/inventory/banner/b6960301-bb3c-4b75-af0e-433a8ce0a6b9.png" style={{color: "transparent", objectFit: "contain", flexShrink: 0}}/>
+                                    <span className="shrink-0 text-lg font-medium leading-5 text-[#586274]">Toys</span>
+                                    <div className="absolute bottom-0 h-[3px] w-full bg-[#9A16CA] transition-transform duration-300" style={{borderTopLeftRadius: "4px", borderTopRightRadius: "4px", opacity: "0"}}></div>
+                                </button>
+                                <button className="relative flex items-center gap-1 px-1 shrink-0 pb-3">
+                                    <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/inventory/banner/8e8a58b9-f2d7-46fb-9634-930b016499fa.png" style={{color: "transparent", objectFit: "contain", flexShrink: 0}}/>
+                                    <span className="shrink-0 text-lg font-medium leading-5 text-[#586274]">Fresh</span>
+                                    <div className="absolute bottom-0 h-[3px] w-full bg-[#9A16CA] transition-transform duration-300" style={{borderTopLeftRadius: "4px", borderTopRightRadius: "4px", opacity: "0"}}></div>
+                                </button>
+                                <button className="relative flex items-center gap-1 px-1 shrink-0 pb-3">
+                                    <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/inventory/banner/5c9a7bea-68b1-4bad-9fab-44cc940b72ee.png" style={{color: "transparent", objectFit: "contain", flexShrink: 0}}/>
+                                    <span className="shrink-0 text-lg font-medium leading-5 text-[#586274]">Electronics</span>
+                                    <div className="absolute bottom-0 h-[3px] w-full bg-[#9A16CA] transition-transform duration-300" style={{borderTopLeftRadius: "4px", borderTopRightRadius: "4px", opacity: "0"}}></div>
+                                </button>
+                                <button className="relative flex items-center gap-1 px-1 shrink-0 pb-3">
+                                    <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/inventory/banner/c882779f-738d-46f8-8656-8ebb72246b46.png" style={{color: "transparent", objectFit: "contain", flexShrink: 0}}/>
+                                    <span className="shrink-0 text-lg font-medium leading-5 text-[#586274]">Mobiles</span>
+                                    <div className="absolute bottom-0 h-[3px] w-full bg-[#9A16CA] transition-transform duration-300" style={{borderTopLeftRadius: "4px", borderTopRightRadius: "4px", opacity: "0"}}></div>
+                                </button>
+                                <button className="relative flex items-center gap-1 px-1 shrink-0 pb-3">
+                                    <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/inventory/banner/fcb1b518-5047-4aee-a6c4-3677c801d2ca.png" style={{color: "transparent", objectFit: "contain", flexShrink: 0}}/>
+                                    <span className="shrink-0 text-lg font-medium leading-5 text-[#586274]">Beauty</span>
+                                    <div className="absolute bottom-0 h-[3px] w-full bg-[#9A16CA] transition-transform duration-300" style={{borderTopLeftRadius: "4px", borderTopRightRadius: "4px", opacity: "0"}}></div>
+                                </button>
+                                <button className="relative flex items-center gap-1 px-1 shrink-0 pb-3">
+                                    <img alt="" fetchPriority="low" loading="lazy" width="24" height="24" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/inventory/banner/331fa0bc-afda-409d-a201-acc3deedaa2d.png" style={{color: "transparent", objectFit: "contain", flexShrink: 0}}/>
+                                    <span className="shrink-0 text-lg font-medium leading-5 text-[#586274]">Fashion</span>
+                                    <div className="absolute bottom-0 h-[3px] w-full bg-[#9A16CA] transition-transform duration-300" style={{borderTopLeftRadius: "4px", borderTopRightRadius: "4px", opacity: "0"}}></div>
+                                </button>
                             </div>
                         </div>
-                    </div>
-                    <div className="addresses_deleteFooter__QMidJ">
-                        <button className=" px-7 text-base border-skin-primary border bg-skin-primary text-skin-base  tracking-widest mr-2 flex-1 !rounded-lg !py-3 !font-bold" type="button" aria-label="Delete">
-                            <div className="flex items-center justify-center">Delete</div>
-                        </button>
-                        <button className="px-7 text-base border-skin-primary border bg-skin-muted-dark bg-opacity-10 text-skin-muted-dark text-opacity-60 ml-2 flex-1 !rounded-lg !border-skin-primary-void/10 !py-3 !font-bold" type="button" aria-label="Cancel">
-                            <div className="flex items-center justify-center">Cancel</div>
-                        </button>
-                    </div>
+                    </section>
                 </div>
+                <div className="absolute bottom-0 h-[3px] bg-[#9A16CA] transition-transform duration-300" style={{borderTopLeftRadius: "4px", borderTopRightRadius: "4px", width: "55.3672px", transform: "translateX(0px)"}}></div>
             </div>
+            <div className="relative bottom-0 h-[2px] w-full bg-[#EBECEF]"></div>
         </div>
+    </div>     
         
     </>
   )
