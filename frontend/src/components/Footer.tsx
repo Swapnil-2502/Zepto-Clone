@@ -1,6 +1,6 @@
 
 
-const Dummy = () => {
+const Footer = () => {
   return (
     <>
        
@@ -353,73 +353,5 @@ const Dummy = () => {
   )
 }
 
-export default Dummy
+export default Footer
 
-// import React, { createContext, useContext, useState } from "react";
-// import axios from "axios";
-// import { useAuth } from "./authContext"; // if you need the token
-
-// type Address = {
-//   _id: string;
-//   saveAddressAs: "Home" | "Work" | "Other";
-//   blockOrHouseNumber: string;
-//   streetName?: string;
-//   landmark?: string;
-//   receiverName?: string;
-//   receiverContact?: string;
-// };
-
-// type AddressContextType = {
-//   addresses: Address[];
-//   fetchAddresses: () => Promise<void>;
-//   addAddress: (data: Omit<Address, "_id">) => Promise<void>;
-//   updateAddress: (id: string, data: Partial<Omit<Address, "_id">>) => Promise<void>;
-//   deleteAddress: (id: string) => Promise<void>;
-// };
-
-// const AddressContext = createContext<AddressContextType | undefined>(undefined);
-
-// export const AddressProvider = ({ children }: { children: React.ReactNode }) => {
-//   const [addresses, setAddresses] = useState<Address[]>([]);
-//   const { token } = useAuth(); // if token is needed for API auth
-
-//   const headers = {
-//     Authorization: `Bearer ${token}`,
-//   };
-
-//   const fetchAddresses = async () => {
-//     const res = await axios.get("/api/user/addresses", { headers });
-//     setAddresses(res.data.addresses);
-//   };
-
-//   const addAddress = async (data: Omit<Address, "_id">) => {
-//     const res = await axios.post("/api/user/addresses", data, { headers });
-//     setAddresses(res.data.user.addresses); // or refetch all
-//   };
-
-//   const updateAddress = async (id: string, data: Partial<Omit<Address, "_id">>) => {
-//     const res = await axios.put(`/api/user/addresses/${id}`, data, { headers });
-//     setAddresses(res.data.user.addresses); // or refetch all
-//   };
-
-//   const deleteAddress = async (id: string) => {
-//     const res = await axios.delete(`/api/user/addresses/${id}`, { headers });
-//     setAddresses(res.data.user.addresses); // or refetch all
-//   };
-
-//   return (
-//     <AddressContext.Provider
-//       value={{ addresses, fetchAddresses, addAddress, updateAddress, deleteAddress }}
-//     >
-//       {children}
-//     </AddressContext.Provider>
-//   );
-// };
-
-// export const useAddress = () => {
-//   const context = useContext(AddressContext);
-//   if (!context) {
-//     throw new Error("useAddress must be used within AddressProvider");
-//   }
-//   return context;
-// };
