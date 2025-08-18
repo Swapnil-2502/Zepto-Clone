@@ -1,5 +1,5 @@
 // src/components/Header.tsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginFormModel from "./LoginFormModel";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,19 @@ const Header: React.FC = () => {
   const {user} = useAuth()
 
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const saved = localStorage.getItem("selectedAddress")
+    if(saved){
+      setSelectedAddress(JSON.parse(saved))
+    }
+  },[])
+
+  useEffect(()=>{
+    if(selectedAddress){
+      localStorage.setItem("selectedAddress",JSON.stringify(selectedAddress))
+    }
+  },[selectedAddress])
 
   return (
     <>
@@ -49,9 +62,6 @@ const Header: React.FC = () => {
               style={{ objectFit: "contain" }}
             />
           </a>
-
-          
-
          
           {
             selectedAddress ? (
