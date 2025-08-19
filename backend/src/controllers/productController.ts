@@ -1,6 +1,23 @@
 import { Request , Response } from "express";
 import  Product  from "../models/Product";
 
+export const getProducts = async (req: Request, res: Response) => {
+    const {category} = req.query
+
+    try{
+        let filter = {}
+        if(category) filter = {category}
+
+        const products = await Product.find(filter)
+
+        res.status(200).json({Products: products})
+    }
+    catch(error){
+        console.error("Error Creating Product:", error);
+        return res.status(500).json({ message: "Internal Server Error." });
+    }
+}
+
 export const createProduct = async (req: Request, res: Response) => {
     try{
         const { title, netQty, mrp, brand, sellerName, sellerAddress, 
