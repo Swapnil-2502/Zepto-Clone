@@ -18,6 +18,21 @@ export const getProducts = async (req: Request, res: Response) => {
     }
 }
 
+export const getProductById = async (req: Request, res: Response) => {
+    const {productId} = req.params
+
+    try{
+        const product = await Product.findById(productId)
+        if(!product) return res.status(404).json({message: "Invalid ID, product doesnt exists"})
+
+        res.status(200).json({product: product})
+    }
+    catch(error){
+        console.error("Error Getting Product by Id:", error);
+        return res.status(500).json({ message: "Internal Server Error." });
+    }
+}
+
 export const createProduct = async (req: Request, res: Response) => {
     try{
         const { title, netQty, mrp, brand, sellerName, sellerAddress, 
