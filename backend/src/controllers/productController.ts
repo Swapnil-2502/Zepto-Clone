@@ -13,7 +13,7 @@ export const getProducts = async (req: Request, res: Response) => {
         res.status(200).json({Products: products})
     }
     catch(error){
-        console.error("Error Creating Product:", error);
+        console.error("Error Getting Product:", error);
         return res.status(500).json({ message: "Internal Server Error." });
     }
 }
@@ -68,6 +68,37 @@ export const createProduct = async (req: Request, res: Response) => {
     }
     catch(error){
         console.error("Error Creating Product:", error);
+        return res.status(500).json({ message: "Internal Server Error." });
+    }
+}
+
+export const updateProduct =  async (req: Request, res: Response) => {
+    const {id} = req.params
+
+    try{
+        const existingProduct = await Product.findById(id)
+        if(!existingProduct) return res.status(404).json({message: "Product does not exists"})
+        
+        if (req.body.category && !['CoffeeProducts', 'MealProducts'].includes(req.body.category)) {
+            return res.status(400).json({
+                message: 'Invalid category. Must be either "CoffeeProducts" or "MealProducts"'
+            });
+        }
+
+        const updatedProduct = await Product.findByIdAndUpdate(
+            id,
+            { $set: req.body },
+            { new: true, runValidators: true }
+        );
+
+        res.status(200).json({
+            message: "Product updated successfully.",
+            updatedProduct
+        });
+
+    }
+    catch(error){
+        console.error("Error Updating Product:", error);
         return res.status(500).json({ message: "Internal Server Error." });
     }
 }
