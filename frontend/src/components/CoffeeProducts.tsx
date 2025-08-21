@@ -9,6 +9,8 @@ export type ProductApiResponse = {
     netQty: string;
     stars: number;
     reviewsCount: string;
+    imageURL: string;
+    currPrice: number;
     mrp: number;
     brand: string;
     dietaryPreference: string;
@@ -43,6 +45,8 @@ const CoffeeProducts = () => {
                     netQty: p.netQty,
                     stars: p.stars,
                     reviewsCount: p.reviewsCount,
+                    imageURL: p.imageURL,
+                    currPrice: p.currPrice,
                     mrp: p.mrp
                 }))
                 setProducts(mapped)

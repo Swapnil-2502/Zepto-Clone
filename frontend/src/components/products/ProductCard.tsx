@@ -6,6 +6,8 @@ export type ProductData = {
     netQty: string;
     stars: number;
     reviewsCount: string;
+    imageURL: string;
+    currPrice: number;
     mrp: number;
     brand: string;
     dietaryPreference: string;
@@ -36,8 +38,12 @@ const ProductCard: React.FC<Props> = ({product}) => {
         netQty,
         stars,
         reviewsCount,
+        imageURL,
+        currPrice,
         mrp,    
     } = product
+    
+    const discount = mrp - currPrice
 
   return (
     <>
@@ -46,7 +52,7 @@ const ProductCard: React.FC<Props> = ({product}) => {
                 
                 <div data-slot-id="ProductImageWrapper" className="_container_6hrif_1 _image-wrapper_c1j8m_32">
                     <div className="_base_shgav_2 _base_border_shgav_13 _product-image--sm_c1j8m_40">
-                        <img alt={title} title={title} className="_image_shgav_18" loading="lazy" src="https://cdn.zeptonow.com/production/tr:w-1280,ar-5304-5304,pr-true,f-auto,q-80/cms/product_variant/9bc896d4-229d-45a4-8294-b36f97f5992c.jpeg"/>
+                        <img alt={title} title={title} className="_image_shgav_18" loading="lazy" src={imageURL} />
                         <button data-mode="default" className="_base_19qv4_2 _sm_19qv4_52 _empty_19qv4_30 _add-to-cart-button_c1j8m_88" data-size="sm" data-show-variant-selector="false">ADD</button>
                         <div className="_sponsor-tag_ztoqw_1 _sponsor-tag_c1j8m_113" data-slot-id="SponsorTag">
                             <img className="_sponsor-tag-image_ztoqw_13" height="10" width="14" alt="Icon-2.png" src="https://cdn.zeptonow.com/production/tr:w-1280,ar-48-48,pr-true,f-auto,q-80/inventory/product/cec23e7c-ec59-49e9-9a51-4b83d22bb2eb.png"/>
@@ -56,10 +62,10 @@ const ProductCard: React.FC<Props> = ({product}) => {
 
                 <div className="_price-and-discount-attribute_c1j8m_50">
                     <div data-slot-id="Price" className="_base_ljyvk_2 _price-container_c1j8m_58">
-                        <p className="_price_ljyvk_11 _price_sm_ljyvk_19"><span className="_currency-symbol_ljyvk_49">₹</span>113</p>
+                        <p className="_price_ljyvk_11 _price_sm_ljyvk_19"><span className="_currency-symbol_ljyvk_49">₹</span>{currPrice}</p>
                         <p className="_original-price_ljyvk_35"><span className="_currency-symbol_ljyvk_49">₹</span>{mrp}</p>
                     </div>
-                    <div className="_base_oilfk_1"><span>SAVE</span><span>₹416</span></div>
+                    <div className="_base_oilfk_1"><span>SAVE</span><span>₹{discount}</span></div>
                 </div>
 
                 <div data-slot-id="PackSize" className="_base_4i17o_1 _pack-size-container_c1j8m_64"><span>{netQty}</span></div>
