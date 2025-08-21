@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 import type { ProductData } from "./products/ProductCard"
 import axios from "../api/axios";
 import ProductCard from "./products/ProductCard";
@@ -30,16 +30,16 @@ export type ProductApiResponse = {
 };
 
 
-const CoffeeProducts = () => {
+const MealProducts = () => {
     const [products, setProducts] = useState<ProductData[]>([])
     const [scrollLeftButton, setscrollLeftButton] = useState(false)
     const [scrollRightButton, setScrollRightButton] = useState(true)
     const scrollRef = useRef<HTMLDivElement>(null)
 
-    useEffect(() => {
+    useEffect(()=>{
         const fetchProducts = async () => {
-            try{
-                const res = await axios.get("/products?category=CoffeeProducts")
+           try{
+                const res = await axios.get("/products?category=MealProducts")
                 const mapped: ProductData[] = (res.data.Products || []).map((p:ProductApiResponse) => ({
                     _id: p._id,
                     title: p.title,
@@ -56,7 +56,7 @@ const CoffeeProducts = () => {
                 console.error(error)
             }
         }
-        fetchProducts();
+        fetchProducts()
     },[])
 
     const scroll = (direction: "left" | "right") => {
@@ -90,27 +90,27 @@ const CoffeeProducts = () => {
         el.addEventListener("scroll", handleScroll)
         return () => el.removeEventListener("scroll", handleScroll)
     },[])
- 
+
   return (
     <>
         <div className="opacity-0" style={{opacity: "1"}}>
-            <div className="flex items-start gap-14" style={{padding: "3.25rem 1.25rem 3.25rem 2.5rem", marginBottom: "3.25rem", borderRadius: "1rem", borderColor: "rgb(255, 255, 255)", background: "url('https://cdn.zeptonow.com/production/inventory/banner/1b4d7f2a-4d0a-4729-8dfd-649d3492903b.png') center bottom / cover no-repeat"}}>
+            <div className="flex items-start gap-14" style={{padding: "3.25rem 1.25rem 3.25rem 2.5rem", marginBottom: "3.25rem", borderRadius: "1rem", borderColor: "rgb(255, 255, 255)", background: "url('https://cdn.zeptonow.com/production/inventory/banner/b8f27224-f939-48a1-b200-98b93bc87e2d.png') center bottom / cover no-repeat"}}>
                 <div className="flex w-full max-w-max shrink-0 flex-col justify-between gap-11">
-                    <img alt="Header.png" fetchPriority="low" loading="lazy" width="272" height="156" decoding="async" data-nimg="1" className="relative overflow-hidden h-[156px] w-full" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/tr:w-272,ar-1088-624,pr-true,f-auto,q-80/inventory/banner/92d8f5bd-3795-4cb7-a0ba-8396a85a778d.png" style={{color: "transparent", objectFit: "contain", padding: "0rem"}}/>
-                    <a href="/uncl/coffee-lovers?clientParams=STORE_ID&amp;scid=27bf4610-ee6e-440c-9a7c-2b4e955dddca&amp;itemLimit=10&amp;type=store_products_by_subcategory">
-                        <img alt="Footer.png" fetchPriority="low" loading="lazy" width="180" height="52" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/tr:w-180,ar-720-208,pr-true,f-auto,q-80/inventory/banner/cf4eab38-7fea-4cb4-b76f-781f92604bf0.png" style={{color: "transparent", objectFit: "contain", padding: "0rem"}}/>
+                    <img alt="Header.png" fetchPriority="low" loading="lazy" width="272" height="156" decoding="async" data-nimg="1" className="relative overflow-hidden h-[156px] w-full" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/tr:w-272,ar-1088-624,pr-true,f-auto,q-80/inventory/banner/84a4df7a-1102-4171-955b-cd36ca29e646.png" style={{color: "transparent", objectFit: "contain", padding: "0rem"}}/>
+                    <a href="/uncl/wholesome-meals?clientParams=STORE_ID&amp;scid=fe2a8eed-2c01-4cd7-9d53-3720344bc4bd&amp;itemLimit=10&amp;type=store_products_by_subcategory">
+                        <img alt="Footer.png" fetchPriority="low" loading="lazy" width="180" height="52" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/tr:w-180,ar-720-208,pr-true,f-auto,q-80/inventory/banner/c4c8362b-cfa2-4fb0-8444-f8ee42262229.png" style={{color: "transparent", objectFit: "contain", padding: "0rem"}}/>
                     </a>
                 </div>
                 <div className="overflow-scroll">
                     <div className="relative">
                         <section className="embla">
                             <div className="embla__viewport overflow-x-scroll scrollbar-hide" ref={scrollRef}>
-                                <div className="embla__container" >
+                                <div className="embla__container">
                                     {
                                         products.map((p) => <ProductCard key={p._id} product={p} />)
                                     }
-                                </div>
-                            </div>
+                                </div>    
+                            </div>  
                             {scrollLeftButton &&                               
                                 <div className="absolute left-5 top-1/2 z-10 -translate-y-1/2 ">
                                     <button className="flex h-8 w-8 items-center justify-center rounded-full bg-black p-2 shadow-lg" type="button"  onClick={() => scroll("left")}>
@@ -131,11 +131,12 @@ const CoffeeProducts = () => {
                              }
                         </section>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div>    
+            </div>    
+        </div>    
+    
     </>
   )
 }
 
-export default CoffeeProducts
+export default MealProducts
