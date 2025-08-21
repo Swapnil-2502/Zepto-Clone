@@ -6,6 +6,7 @@ export interface IProduct extends Document {
     stars: number;
     reviewsCount: string;
     imageURL: string;
+    currPrice: number,
     mrp: number;
     brand: string;
     dietaryPreference: string;
@@ -31,6 +32,7 @@ const ProductSchema = new Schema<IProduct>(
         stars: {type: Number, default: 0 },
         reviewsCount: {type: String},
         imageURL: {type: String, default: ""},
+        currPrice: {type: Number, required: true},
         mrp: {type: Number, required: true},
         brand: {type: String, required: true},
         dietaryPreference: {type: String},
