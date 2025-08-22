@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export type ProductData = {
@@ -31,6 +32,22 @@ type Props = {
 };
 
 const ProductCard: React.FC<Props> = ({product}) => {
+    const [quantity, setQuantity] = useState(0);
+
+    const handleincrease = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        setQuantity((prev) => prev+1)
+    }
+
+    const handledecrease = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
+        e.preventDefault()
+        setQuantity((prev) => prev-1)
+    }
+
+    const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
+        e.preventDefault()
+        setQuantity(1);
+    }
 
     const {
         _id,
@@ -53,7 +70,29 @@ const ProductCard: React.FC<Props> = ({product}) => {
                 <div data-slot-id="ProductImageWrapper" className="_container_6hrif_1 _image-wrapper_c1j8m_32">
                     <div className="_base_shgav_2 _base_border_shgav_13 _product-image--sm_c1j8m_40">
                         <img alt={title} title={title} className="_image_shgav_18" loading="lazy" src={imageURL} />
-                        <button data-mode="default" className="_base_19qv4_2 _sm_19qv4_52 _empty_19qv4_30 _add-to-cart-button_c1j8m_88" data-size="sm" data-show-variant-selector="false">ADD</button>
+                        
+                        {quantity>0 ? (
+                            <button data-mode="default" className="_base_19qv4_2 _sm_19qv4_52 _hasQuantity_19qv4_56 _add-to-cart-button_c1j8m_88">
+                                <div className="_quantitySelector_19qv4_73">
+                                    <button data-size="sm" className="_iconButton_19qv4_88" aria-label="Decrease quantity" onClick={handledecrease}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                                            <path fill="#fff" fill-rule="evenodd" d="M1.62 8.023c0-.483.392-.875.875-.875H13.5a.875.875 0 0 1 0 1.75H2.495a.875.875 0 0 1-.875-.875Z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                    <span data-size="sm" className="_quantityText_19qv4_80">{quantity}</span>
+                                    <button data-size="sm" className="_iconButton_19qv4_88" aria-label="Increase quantity" onClick={handleincrease}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none">
+                                            <path fill="#fff" d="M8.022 15.149a.978.978 0 1 0 1.957 0V9.952h5.176a.978.978 0 0 0 0-1.957H9.98V2.873a.978.978 0 1 0-1.957 0v5.122H2.851a.978.978 0 1 0 0 1.957h5.171v5.197Z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </button>
+                        ):(
+                            <button data-mode="default" className="_base_19qv4_2 _sm_19qv4_52 _empty_19qv4_30 _add-to-cart-button_c1j8m_88" data-size="sm" data-show-variant-selector="false" onClick={handleAddToCart}>ADD</button>
+                        )
+                        }
+                        
+                        
                         <div className="_sponsor-tag_ztoqw_1 _sponsor-tag_c1j8m_113" data-slot-id="SponsorTag">
                             <img className="_sponsor-tag-image_ztoqw_13" height="10" width="14" alt="Icon-2.png" src="https://cdn.zeptonow.com/production/tr:w-1280,ar-48-48,pr-true,f-auto,q-80/inventory/product/cec23e7c-ec59-49e9-9a51-4b83d22bb2eb.png"/>
                         </div>
@@ -87,3 +126,4 @@ const ProductCard: React.FC<Props> = ({product}) => {
 }
 
 export default ProductCard
+
