@@ -1,5 +1,6 @@
 import './App.css'
 import Account from './components/Account'
+import Cart from './components/Cart'
 import Header from './components/Header'
 import ProductDetail from './components/products/ProductDetail'
 import ProductPage from './components/products/ProductPage'
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
         <Header />
+        <Cart />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/account/profile" element={<Account />} />

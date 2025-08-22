@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import LoginFormModel from "./LoginFormModel";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SelectLocation from "./header/SelectLocation";
 
 type Address = {
@@ -23,6 +23,7 @@ const Header: React.FC = () => {
   const {user} = useAuth()
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(()=>{
     const saved = localStorage.getItem("selectedAddress")
@@ -36,6 +37,12 @@ const Header: React.FC = () => {
       localStorage.setItem("selectedAddress",JSON.stringify(selectedAddress))
     }
   },[selectedAddress])
+
+  const openCart = () =>{
+    const params = new URLSearchParams(location.search)
+    params.set("cart", "open")
+    navigate(`${location.pathname}?${params.toString()}`)
+  }
 
   return (
     <>
@@ -176,14 +183,14 @@ const Header: React.FC = () => {
           </div>
 
           {/* Cart */}
-          <div className="inline-block">
+          <div className="inline-block cursor-pointer">
             <div className="group relative">
               <div className="peer">
                 <a
                   aria-label="Cart"
                   className="relative flex flex-col items-center gap-y-1"
                   data-testid="cart-btn"
-                  href="/?cart=open"
+                  onClick={openCart}
                 >
                   <svg color="#000000" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M10.5586 22C11.387 22 12.0586 21.317 12.0586 20.4746C12.0586 19.6321 11.387 18.9492 10.5586 18.9492C9.73017 18.9492 9.05859 19.6321 9.05859 20.4746C9.05859 21.317 9.73017 22 10.5586 22Z" fill="#000000"></path>
@@ -202,7 +209,6 @@ const Header: React.FC = () => {
               </div>
             </div>
           </div>
-          
         </div>
         
       </header>
