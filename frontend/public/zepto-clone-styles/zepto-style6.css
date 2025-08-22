@@ -2,3 +2,24 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none; 
 }
+
+
+.pnV2-desktop_footer__content__P0wyP {
+    padding: .875rem;
+    margin-bottom: .75rem !important;
+    display: flex;
+    flex-direction: column;
+    color: #2b1e35 !important
+}
+
+.pnV2-desktop_footer__content__P0wyP>h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: normal
+}
+
+.pnV2-desktop_footer__content__P0wyP>ol {
+    margin: 0;
+    color: rgba(43,30,53,.75)
+}

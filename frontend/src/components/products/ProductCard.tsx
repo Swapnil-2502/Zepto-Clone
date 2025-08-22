@@ -47,7 +47,7 @@ const ProductCard: React.FC<Props> = ({product}) => {
 
   return (
     <>
-        <Link to={`/pn/vietnamese-cold-coffee/pvid/${_id}`}>
+        <Link to={`/pn/${title}/pvid/${_id}`}>
             <div className="_container_sm_c1j8m_22 _container_c1j8m_3" data-variant="basic" data-size="sm" data-device="desktop" data-is-out-of-stock="false" style={{backgroundColor: "white"}}>
                 
                 <div data-slot-id="ProductImageWrapper" className="_container_6hrif_1 _image-wrapper_c1j8m_32">
