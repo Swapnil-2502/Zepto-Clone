@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { ProductData } from "./products/ProductCard"
 import axios from "../api/axios";
 import ProductCard from "./products/ProductCard";
+import { Link } from "react-router-dom";
 
 export type ProductApiResponse = {
     _id: string
@@ -97,9 +98,9 @@ const MealProducts = () => {
             <div className="flex items-start gap-14" style={{padding: "3.25rem 1.25rem 3.25rem 2.5rem", marginBottom: "3.25rem", borderRadius: "1rem", borderColor: "rgb(255, 255, 255)", background: "url('https://cdn.zeptonow.com/production/inventory/banner/b8f27224-f939-48a1-b200-98b93bc87e2d.png') center bottom / cover no-repeat"}}>
                 <div className="flex w-full max-w-max shrink-0 flex-col justify-between gap-11">
                     <img alt="Header.png" fetchPriority="low" loading="lazy" width="272" height="156" decoding="async" data-nimg="1" className="relative overflow-hidden h-[156px] w-full" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/tr:w-272,ar-1088-624,pr-true,f-auto,q-80/inventory/banner/84a4df7a-1102-4171-955b-cd36ca29e646.png" style={{color: "transparent", objectFit: "contain", padding: "0rem"}}/>
-                    <a href="/uncl/wholesome-meals?clientParams=STORE_ID&amp;scid=fe2a8eed-2c01-4cd7-9d53-3720344bc4bd&amp;itemLimit=10&amp;type=store_products_by_subcategory">
+                    <Link to={`/uncl/MealProducts`}>
                         <img alt="Footer.png" fetchPriority="low" loading="lazy" width="180" height="52" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/tr:w-180,ar-720-208,pr-true,f-auto,q-80/inventory/banner/c4c8362b-cfa2-4fb0-8444-f8ee42262229.png" style={{color: "transparent", objectFit: "contain", padding: "0rem"}}/>
-                    </a>
+                    </Link>
                 </div>
                 <div className="overflow-scroll">
                     <div className="relative">
