@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../contexts/CartContext";
+import { useEffect } from "react";
 
 export type ProductData = {
     _id: string
@@ -32,21 +33,29 @@ type Props = {
 };
 
 const ProductCard: React.FC<Props> = ({product}) => {
-    const [quantity, setQuantity] = useState(0);
+    const {addToCart, updateQuantity, cartItems} = useCart()
+
+    const cartItem = cartItems.find(item => item.productId === product._id)
+    const quantity = cartItem ? cartItem.quantity : 0;
+    useEffect(() => {
+        console.log("CARTITEM->", cartItem);
+        console.log("QUANTITY->", quantity);
+        console.log("ALLITEMSINCART->",cartItems)
+    }, [cartItem, quantity]);
 
     const handleincrease = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        setQuantity((prev) => prev+1)
+        updateQuantity(product._id, quantity + 1)
     }
 
     const handledecrease = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
         e.preventDefault()
-        setQuantity((prev) => prev-1)
+        updateQuantity(product._id, quantity - 1)
     }
 
     const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
         e.preventDefault()
-        setQuantity(1);
+        addToCart(product, 1);
     }
 
     const {
@@ -87,9 +96,9 @@ const ProductCard: React.FC<Props> = ({product}) => {
                                     </button>
                                 </div>
                             </button>
-                        ):(
-                            <button data-mode="default" className="_base_19qv4_2 _sm_19qv4_52 _empty_19qv4_30 _add-to-cart-button_c1j8m_88" data-size="sm" data-show-variant-selector="false" onClick={handleAddToCart}>ADD</button>
-                        )
+                            ):(
+                                <button data-mode="default" className="_base_19qv4_2 _sm_19qv4_52 _empty_19qv4_30 _add-to-cart-button_c1j8m_88" data-size="sm" data-show-variant-selector="false" onClick={handleAddToCart}>ADD</button>
+                            )
                         }
                         
                         

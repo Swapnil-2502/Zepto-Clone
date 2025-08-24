@@ -4,6 +4,7 @@ import LoginFormModel from "./LoginFormModel";
 import { useAuth } from "../contexts/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import SelectLocation from "./header/SelectLocation";
+import { useCart } from "../contexts/CartContext";
 
 type Address = {
     saveAddressAs: string;
@@ -21,6 +22,11 @@ const Header: React.FC = () => {
   const [addressModel, setAddressModel] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null)
   const {user} = useAuth()
+
+  const {totalItems} = useCart()
+  useEffect(()=>{
+    console.log("TOTALITEMS->",totalItems)
+  },[totalItems])
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -198,6 +204,8 @@ const Header: React.FC = () => {
                       <path d="M2 2.06277C3.76471 2.0629 4.94118 1.4978 6.11765 3.75768M6.11765 3.75768H19.2461C20.6051 3.75768 21.5684 5.0841 21.1479 6.37649L19.5082 11.416C19.2402 12.2397 18.4725 12.7972 17.6064 12.7972H9.05882M6.11765 3.75768L9.05882 12.7972M20.8235 16.752H9.27151C8.17943 16.752 7.29412 15.8667 7.29412 14.7746V14.5619C7.29412 13.5873 8.0842 12.7972 9.05882 12.7972V12.7972" stroke="#000000" stroke-linecap="round" stroke-width="1.8"></path>
                   </svg>
                   <span className="text-sm text-black">Cart</span>
+                  {totalItems > 0 ? <span className="absolute -top-2 -right-2"><span className="relative flex h-4 w-4"><span className="absolute inline-flex h-full w-full rounded-full p-2.5 opacity-75 bg-skin-primary-violet animate-ping-short"></span><span className="relative inline-flex h-4 w-4 items-center justify-center rounded-full p-2.5 text-[10px] text-white bg-skin-primary-violet" data-testid="cart-items-number">{totalItems}</span></span></span>
+                    : "" }   
                 </a>
               </div>
               <div
