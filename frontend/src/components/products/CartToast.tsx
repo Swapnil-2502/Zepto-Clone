@@ -8,7 +8,6 @@ const CartToast = () => {
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        console.log("CARTITEMFROMCARTTOAST->", cartItems);
         if(cartItems.length > 0){
             setToast(true)
 

@@ -37,11 +37,7 @@ const ProductCard: React.FC<Props> = ({product}) => {
 
     const cartItem = cartItems.find(item => item.productId === product._id)
     const quantity = cartItem ? cartItem.quantity : 0;
-    useEffect(() => {
-        console.log("CARTITEM->", cartItem);
-        console.log("QUANTITY->", quantity);
-        console.log("ALLITEMSINCART->",cartItems)
-    }, [cartItem, quantity]);
+  
 
     const handleincrease = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
