@@ -15,13 +15,16 @@ import '../public/zepto-clone-styles/zepto-style5.css'
 import '../public/zepto-clone-styles/zepto-style6.css'
 import '../public/zepto-clone-styles/zepto-style7.css'
 import '../public/zepto-clone-styles/zepto-style8.css'
+import { CartProvider } from './contexts/CartContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
         <AddressProvider>
-          <App />
+          <CartProvider>
+            <App />
+          </CartProvider>
         </AddressProvider>
         <Toaster position="top-center" toastOptions={{style:{marginTop:'60px'}}} />
       </AuthProvider>
