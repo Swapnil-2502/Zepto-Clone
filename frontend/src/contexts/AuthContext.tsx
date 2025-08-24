@@ -1,6 +1,6 @@
 import axios from "../api/axios";
 import { createContext, useContext, useEffect, useState } from "react";
-
+import type { Address } from "../components/Header";
 
 type User = {
     phone: string,
@@ -11,11 +11,14 @@ type User = {
 type AuthContextType = {
     user: User | null;
     token: string | null;
+    selectedAddress: Address | null;
     loginUser: (phone: string, otp: string) => Promise<"newUser" | "loggedIn">; 
     addName: (name: string) => Promise<void>;
     updateNameEmail: ({name,email}:{name?: string, email?: string}) => Promise<void>;
     logout: () => void;
     deleteAccount: () => void;
+    setSelectedAddress: (address: Address | null) => void;
+    clearSelectedAddress: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -23,14 +26,20 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | null>(null)
     const [token, setToken] = useState<string | null>(null);
+    const [selectedAddress, setSelectedAddressState] = useState<Address | null>(null);
 
     useEffect(()=>{
         const savedToken = localStorage.getItem('token')
         const savedUser = localStorage.getItem("user")
+        const saved = localStorage.getItem("selectedAddress");
 
         if (savedToken && savedUser) {
             setToken(savedToken);
             setUser(JSON.parse(savedUser));
+        }
+
+        if(saved){
+            setSelectedAddressState(JSON.parse(saved))
         }
     },[])
 
@@ -71,11 +80,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         })
     }
 
+    const setSelectedAddress = (address: Address | null) => {
+        setSelectedAddressState(address);
+        if (address) {
+        localStorage.setItem("selectedAddress", JSON.stringify(address));
+        } else {
+        localStorage.removeItem("selectedAddress");
+        }
+    };
+
+    const clearSelectedAddress = () => {
+        setSelectedAddressState(null);
+        localStorage.removeItem("selectedAddress");
+    };
+
     const logout = () => {
         setUser(null);
         setToken(null);
         localStorage.removeItem("token");
         localStorage.removeItem("user");
+        clearSelectedAddress()
+        localStorage.removeItem("cartItems")
+
+        window.dispatchEvent(new Event("storage"));
     }
 
     const deleteAccount = async () =>{
@@ -90,7 +117,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     return (
-        <AuthContext.Provider value={{user, token, loginUser, addName, logout, updateNameEmail, deleteAccount}}>
+        <AuthContext.Provider value={{user, token, loginUser, addName, logout, updateNameEmail, deleteAccount, selectedAddress, setSelectedAddress, clearSelectedAddress}}>
             {children}
         </AuthContext.Provider> 
     )

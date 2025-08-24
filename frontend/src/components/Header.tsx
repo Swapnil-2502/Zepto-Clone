@@ -1,5 +1,5 @@
 // src/components/Header.tsx
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import LoginFormModel from "./LoginFormModel";
 import { useAuth } from "../contexts/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import SelectLocation from "./header/SelectLocation";
 import { useCart } from "../contexts/CartContext";
 import CartToast from "./products/CartToast";
 
-type Address = {
+export type Address = {
     saveAddressAs: string;
     HouseNumber: string;
     BlockNumber: string;
@@ -21,29 +21,14 @@ type Address = {
 const Header: React.FC = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [addressModel, setAddressModel] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null)
+  const { selectedAddress, setSelectedAddress } = useAuth(); 
   const {user} = useAuth()
 
   const {totalItems} = useCart()
-  useEffect(()=>{
-    console.log("TOTALITEMS->",totalItems)
-  },[totalItems])
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(()=>{
-    const saved = localStorage.getItem("selectedAddress")
-    if(saved){
-      setSelectedAddress(JSON.parse(saved))
-    }
-  },[])
-
-  useEffect(()=>{
-    if(selectedAddress){
-      localStorage.setItem("selectedAddress",JSON.stringify(selectedAddress))
-    }
-  },[selectedAddress])
 
   const openCart = () =>{
     const params = new URLSearchParams(location.search)
