@@ -5,6 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import SelectLocation from "./header/SelectLocation";
 import { useCart } from "../contexts/CartContext";
+import CartToast from "./products/CartToast";
 
 type Address = {
     saveAddressAs: string;
@@ -217,8 +218,9 @@ const Header: React.FC = () => {
               </div>
             </div>
           </div>
+          <CartToast />
+
         </div>
-        
       </header>
       <LoginFormModel isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
       {addressModel && (

@@ -13,11 +13,10 @@ export type CartItems = {
 }
 
 type CartContextType = {
-    cartItems: { productId: string; quantity: number }[];
-    toastItems: CartItems[];
+    cartItems: CartItems[];
     addToCart: (product: ProductData, quantity: number) => void;
     updateQuantity: (productId: string, quantity: number) => void;
-    removeToast: (productId: string, timestamp: number) => void;
+    // removeToast: (productId: string, timestamp: number) => void;
     totalItems: number;
 }
 
@@ -25,7 +24,6 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({children}: {children: React.ReactNode }) => {
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
-    const [toastItems, setToastItems] = useState<CartItems[]>([]);
 
     const addToCart = (product: ProductData, quantity: number) => {
         if (quantity <= 0) return;
@@ -51,22 +49,22 @@ export const CartProvider = ({children}: {children: React.ReactNode }) => {
             }];
         })
 
-        const newToast: CartItems = {
-            productId: product._id,
-            quantity,
-            title: product.title,
-            netQty: product.netQty,
-            price: product.currPrice,
-            mrp: product.mrp,
-            imageURL: product.imageURL,
-            timestamp: Date.now(),
-        };
+        // const newToast: CartItems = {
+        //     productId: product._id,
+        //     quantity,
+        //     title: product.title,
+        //     netQty: product.netQty,
+        //     price: product.currPrice,
+        //     mrp: product.mrp,
+        //     imageURL: product.imageURL,
+        //     timestamp: Date.now(),
+        // };
 
-        setToastItems(prev => [...prev, newToast]);
+        // setToastItems(prev => [...prev, newToast]);
 
-        setTimeout(() => {
-            removeToast(product._id, newToast.timestamp!);
-        }, 3000);
+        // setTimeout(() => {
+        //     removeToast(product._id, newToast.timestamp!);
+        // }, 3000);
     }
 
     const updateQuantity = (productId: string, quantity: number) => {
@@ -82,16 +80,16 @@ export const CartProvider = ({children}: {children: React.ReactNode }) => {
         );
     };
 
-    const removeToast = (productId: string, timestamp: number) => {
-        setToastItems(prev => 
-        prev.filter(item => !(item.productId === productId && item.timestamp === timestamp))
-        );
-    };
+    // const removeToast = (productId: string, timestamp: number) => {
+    //     setToastItems(prev => 
+    //     prev.filter(item => !(item.productId === productId && item.timestamp === timestamp))
+    //     );
+    // };
 
     const totalItems = cartItems.reduce((sum, item) => sum + item.quantity,0)
 
     return (
-        <CartContext.Provider value={{cartItems, toastItems, addToCart, updateQuantity, removeToast,totalItems}}>
+        <CartContext.Provider value={{cartItems, addToCart, updateQuantity,totalItems}}>
             {children}
         </CartContext.Provider>
     )
