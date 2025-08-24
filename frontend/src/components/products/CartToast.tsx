@@ -44,11 +44,11 @@ const CartToast = () => {
                     <img alt="" fetchPriority="low" loading="lazy" width="18" height="18" decoding="async" data-nimg="1" className="relative overflow-hidden mr-1 inline-block" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://www.zeptonow.com/images/super-saver/check-mark.svg" style={{color: "transparent", objectFit: "contain"}}/>
                     <span>Added to Cart</span>
                 </div>
-                <button><svg className="" fill="none" height="16" viewBox="0 0 12 12" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M9 3L3 9" stroke="#958E9A" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path><path d="M3 3L9 9" stroke="#958E9A" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path></svg></button>
+                <button onClick={()=>setToast(false)}><svg className="" fill="none" height="16" viewBox="0 0 12 12" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M9 3L3 9" stroke="#958E9A" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path><path d="M3 3L9 9" stroke="#958E9A" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path></svg></button>
             </div>
 
             <ul className="max-h-[310px] overflow-y-auto">
-                {cartItems.map((item) => (
+                {cartItems.slice().reverse().map((item) => (
                     <li>
                         <div className="mb-4 flex gap-3 last:mb-6">
                             <div className="h-[88px] w-[88px] shrink-0 overflow-hidden">
