@@ -15,10 +15,12 @@ type Address = {
 
 type AddressContextType = {
     addresses: Address[];
+    selectedAddress: Address | null;
     fetchAddresses: () => Promise<void>;
     addAddress: (data: Omit<Address, "_id">)=> Promise<void>;
     updateAddress: (id: string, data: Omit<Address, "_id">) => Promise<void>;
     deleteAddress: (id: string) => Promise<void>;
+    setSelectedAddress: (address: Address | null) => void;
 }
 
 const AddressContext = createContext<AddressContextType | undefined>(undefined);
@@ -26,10 +28,29 @@ const AddressContext = createContext<AddressContextType | undefined>(undefined);
 export const AddressProvider = ({children}: {children: React.ReactNode }) => {
     const [address, setAddress] = useState<Address[]>([])
     const {token} = useAuth()
+    const [selectedAddress, setSelectedAddressState] = useState<Address | null>(null)
+
+    useEffect(() => {
+        const saved = localStorage.getItem("selectedAddress");
+
+        if(saved){
+            setSelectedAddressState(JSON.parse(saved))
+        }
+    },[])
 
     const headers = {
         Authorization: `Bearer ${token}`,
     }
+
+    
+    const setSelectedAddress = (address: Address | null) => {
+        setSelectedAddressState(address);
+        if (address) {
+            localStorage.setItem("selectedAddress", JSON.stringify(address));
+        } else {
+            localStorage.removeItem("selectedAddress");
+        }
+    };
 
     const fetchAddresses = useCallback(async () => {
         if (!token) return; 
@@ -57,6 +78,7 @@ export const AddressProvider = ({children}: {children: React.ReactNode }) => {
     const updateAddress = async (id: string, data: Omit<Address, "_id">) => {
         const res = await axios.put(`/user/addresses/${id}`,data,{headers})
         setAddress(res.data.addresses)
+        setSelectedAddressState(res.data.addAddress)
     }
 
     const deleteAddress = async (id:string) => {
@@ -66,7 +88,7 @@ export const AddressProvider = ({children}: {children: React.ReactNode }) => {
 
 
     return (
-        <AddressContext.Provider value={{addresses: address,addAddress, fetchAddresses, deleteAddress, updateAddress}}>
+        <AddressContext.Provider value={{addresses: address,addAddress, fetchAddresses, deleteAddress, updateAddress, selectedAddress, setSelectedAddress}}>
             {children}
         </AddressContext.Provider>
     )
