@@ -76,9 +76,29 @@ export const AddressProvider = ({children}: {children: React.ReactNode }) => {
     }
 
     const updateAddress = async (id: string, data: Omit<Address, "_id">) => {
-        const res = await axios.put(`/user/addresses/${id}`,data,{headers})
-        setAddress(res.data.addresses)
-        setSelectedAddressState(res.data.addAddress)
+        try{
+            const res = await axios.put(`/user/addresses/${id}`,data,{headers})
+            const updatedAddresses = res.data.addresses
+            setAddress(res.data.addresses)
+
+            if (selectedAddress && selectedAddress._id === id) {
+                // Find the updated address in the new array
+                const updatedSelectedAddress = updatedAddresses.find((addr: Address) => addr._id === id);
+                if (updatedSelectedAddress) {
+                    setSelectedAddressState(updatedSelectedAddress);
+                    localStorage.setItem("selectedAddress", JSON.stringify(updatedSelectedAddress));
+                } else {
+                    // If the updated address was deleted or not found, clear selection
+                    setSelectedAddressState(null);
+                    localStorage.removeItem("selectedAddress");
+                }
+            }
+        }
+        catch(error){
+            console.error("Failed to update address:", error);
+            throw error;
+        }
+        
     }
 
     const deleteAddress = async (id:string) => {
