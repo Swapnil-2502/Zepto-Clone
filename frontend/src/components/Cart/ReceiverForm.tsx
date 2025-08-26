@@ -12,6 +12,9 @@ const ReceiverForm: React.FC<RecieverFormProps> = ({onClose}) => {
     const [receiverNumber, setReceiverNumber] = useState("");
     const [showRecieverFormToast, setShowRecieverFormToast] = useState(false)
 
+    const [isValidName, setisValidName] = useState(false)
+    const [isValidNumber, setisValidNumber] = useState(false)
+
     useEffect(()=>{
         if(selectedAddress){
             setReceiverName(selectedAddress.receiverName || "")
@@ -19,10 +22,19 @@ const ReceiverForm: React.FC<RecieverFormProps> = ({onClose}) => {
         }
     },[])
 
+    useEffect(()=>{
+        setisValidName(receiverName.trim().length > 0)
+    },[receiverName])
+
+    useEffect(()=>{
+        const cleanedNumber = receiverNumber.replace(/\D/g, '');
+        setisValidNumber(cleanedNumber.length === 10)
+    },[receiverNumber])
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!selectedAddress) return;
+        if (!selectedAddress || !isValidName || !isValidNumber) return;
 
         try{
             await updateAddress(selectedAddress._id,{
@@ -49,8 +61,8 @@ const ReceiverForm: React.FC<RecieverFormProps> = ({onClose}) => {
     const handleRemove = async () => {
 
         if (!selectedAddress) return;
+
         try{
-            console.log("INSIDE")
             await updateAddress(selectedAddress._id,{
                 saveAddressAs: selectedAddress.saveAddressAs,
                 HouseNumber: selectedAddress.HouseNumber,
@@ -63,11 +75,10 @@ const ReceiverForm: React.FC<RecieverFormProps> = ({onClose}) => {
         catch(error){
             console.error('Failed to update receiver details:', error);
         }
-
-        console.log("HELL=")
-
         onClose()
     }
+
+    const isValidForm = isValidName && isValidNumber
 
   return (
     <>
@@ -110,7 +121,7 @@ const ReceiverForm: React.FC<RecieverFormProps> = ({onClose}) => {
                                                 <div>
                                                     <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4">
                                                         <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Reciever's Name" type="text" value={receiverName} onChange={(e)=>setReceiverName(e.target.value)} name="contactName" />
-                                                        <button aria-label="Close Icon" className="pr-3.5">
+                                                        <button type="button" aria-label="Close Icon" className="pr-3.5" onClick={()=>setReceiverName("")}>
                                                             <svg fill="none" height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg">
                                                                 <path clip-rule="evenodd" d="M15.75 9C15.75 12.7279 12.7279 15.75 9 15.75C5.27208 15.75 2.25 12.7279 2.25 9C2.25 5.27208 5.27208 2.25 9 2.25C12.7279 2.25 15.75 5.27208 15.75 9ZM5.46967 12.5303C5.17678 12.2374 5.17678 11.7626 5.46967 11.4697L7.93934 9L5.46967 6.53033C5.17678 6.23744 5.17678 5.76256 5.46967 5.46967C5.76256 5.17678 6.23744 5.17678 6.53033 5.46967L9 7.93934L11.4697 5.46967C11.7626 5.17678 12.2374 5.17678 12.5303 5.46967C12.8232 5.76256 12.8232 6.23744 12.5303 6.53033L10.0607 9L12.5303 11.4697C12.8232 11.7626 12.8232 12.2374 12.5303 12.5303C12.2374 12.8232 11.7626 12.8232 11.4697 12.5303L9 10.0607L6.53033 12.5303C6.23744 12.8232 5.76256 12.8232 5.46967 12.5303Z" fill="#130022" fill-opacity="0.4" fill-rule="evenodd"></path>
                                                             </svg>
@@ -121,21 +132,24 @@ const ReceiverForm: React.FC<RecieverFormProps> = ({onClose}) => {
                                                     <div className="w-full relative text-base text-skin-inverted flex bg-white items-center border rounded-md mb-4">
                                                         <span className="left-0 pl-3.5"><span>+91</span></span>
                                                         <input className="focus:outline-none block py-3 px-2 appearance-none font-subtitle flex-grow font-normal bg-transparent text-md" inputMode="text" placeholder="Reciever's Phone Number" type="tel" value={receiverNumber} onChange={(e)=>setReceiverNumber(e.target.value)} name="contactNumber" />
-                                                        <button aria-label="Close Icon" className="pr-3.5">
+                                                        <button type="button" aria-label="Close Icon" className="pr-3.5" onClick={()=>setReceiverNumber("")}>
                                                             <svg fill="none" height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M15.75 9C15.75 12.7279 12.7279 15.75 9 15.75C5.27208 15.75 2.25 12.7279 2.25 9C2.25 5.27208 5.27208 2.25 9 2.25C12.7279 2.25 15.75 5.27208 15.75 9ZM5.46967 12.5303C5.17678 12.2374 5.17678 11.7626 5.46967 11.4697L7.93934 9L5.46967 6.53033C5.17678 6.23744 5.17678 5.76256 5.46967 5.46967C5.76256 5.17678 6.23744 5.17678 6.53033 5.46967L9 7.93934L11.4697 5.46967C11.7626 5.17678 12.2374 5.17678 12.5303 5.46967C12.8232 5.76256 12.8232 6.23744 12.5303 6.53033L10.0607 9L12.5303 11.4697C12.8232 11.7626 12.8232 12.2374 12.5303 12.5303C12.2374 12.8232 11.7626 12.8232 11.4697 12.5303L9 10.0607L6.53033 12.5303C6.23744 12.8232 5.76256 12.8232 5.46967 12.5303Z" fill="#130022" fill-opacity="0.4" fill-rule="evenodd"></path></svg>
                                                         </button>
                                                     </div>
+                                                    {!isValidNumber && <p className="text-skin-error mt-1 mb-2 min-h-[1rem] self-start text-sm">Please enter a valid receiver’s phone number</p>}
                                                 </div>
-                                                <button className="py-1 px-7 text-base border-skin-primary border bg-skin-primary text-skin-base tracking-widest rounded-xl !py-3" type="submit">
+                                                <button className={`py-1 px-7 text-base  border  tracking-widest rounded-xl !py-3 ${isValidForm ? "border-skin-primary bg-skin-primary text-skin-base ": "bg-[#7575751a] text-[#75757599]" } `} type="submit"  disabled={!isValidForm}>
                                                     <div className="flex items-center justify-center">
                                                         <h6 className="block font-subtitle text-base tracking-wider">Save Details</h6>
                                                     </div>
                                                 </button>
-                                                <button className="py-1 px-7 text-base border-skin-primary border text-skin-primary border-none mx-auto mt-3 w-max rounded-xl !px-0 !py-1" type="button" aria-label="Remove Receiver's Details" onClick={handleRemove}>
-                                                    <div className="flex items-center justify-center">
-                                                        <h6 className="block font-subtitle text-base tracking-wider">Remove Receiver's Details</h6>
-                                                    </div>
-                                                </button>
+                                                {(selectedAddress?.receiverContact && selectedAddress.receiverName) &&
+                                                    <button className="py-1 px-7 text-base border-skin-primary border text-skin-primary border-none mx-auto mt-3 w-max rounded-xl !px-0 !py-1" type="button" aria-label="Remove Receiver's Details" onClick={handleRemove}>
+                                                        <div className="flex items-center justify-center">
+                                                            <h6 className="block font-subtitle text-base tracking-wider">Remove Receiver's Details</h6>
+                                                        </div>
+                                                    </button>
+                                                }
                                             </form>
                                         </div>
                                     </div>
