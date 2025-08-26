@@ -46,6 +46,29 @@ const ReceiverForm: React.FC<RecieverFormProps> = ({onClose}) => {
         
     }
 
+    const handleRemove = async () => {
+
+        if (!selectedAddress) return;
+        try{
+            console.log("INSIDE")
+            await updateAddress(selectedAddress._id,{
+                saveAddressAs: selectedAddress.saveAddressAs,
+                HouseNumber: selectedAddress.HouseNumber,
+                BlockNumber: selectedAddress.BlockNumber,
+                landmark: selectedAddress.landmark,
+                receiverName: "",
+                receiverContact: ""
+            })
+        }
+        catch(error){
+            console.error('Failed to update receiver details:', error);
+        }
+
+        console.log("HELL=")
+
+        onClose()
+    }
+
   return (
     <>
     <div className="fixed inset-0 z-[99999999] overflow-y-hidden bg-black/70 transition-opacity ease-in">
@@ -108,7 +131,7 @@ const ReceiverForm: React.FC<RecieverFormProps> = ({onClose}) => {
                                                         <h6 className="block font-subtitle text-base tracking-wider">Save Details</h6>
                                                     </div>
                                                 </button>
-                                                <button className="py-1 px-7 text-base border-skin-primary border text-skin-primary border-none mx-auto mt-3 w-max rounded-xl !px-0 !py-1" type="button" aria-label="Remove Receiver's Details">
+                                                <button className="py-1 px-7 text-base border-skin-primary border text-skin-primary border-none mx-auto mt-3 w-max rounded-xl !px-0 !py-1" type="button" aria-label="Remove Receiver's Details" onClick={handleRemove}>
                                                     <div className="flex items-center justify-center">
                                                         <h6 className="block font-subtitle text-base tracking-wider">Remove Receiver's Details</h6>
                                                     </div>

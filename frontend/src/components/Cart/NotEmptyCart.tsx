@@ -91,7 +91,6 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
     ];
 
     
-
   return (
     <>
         <div className={`fixed inset-0 z-[99999] bg-black/70 transition-opacity duration-300 ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"}`} id="side-drawer-overlaycart">
@@ -561,7 +560,7 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                             </div>
 
                             {/* Display the address line or any suitable property */}
-                            {selectedAddress ? (
+                            {(selectedAddress.receiverName || selectedAddress.receiverContact) ? (
                                 <div className="flex items-center justify-between bg-white" style={{marginBottom: "0.75rem", marginLeft: "0.8125rem", marginRight: "0.8125rem", padding: "0.625rem 0.75rem 0.75rem 0.625rem", borderRadius: "0.625rem"}}>
                                     <div><span className="text-heading6 " style={{color: "rgb(38, 42, 51)"}}>Ordering for </span>
                                         <span className="text-cta2 " style={{color: "rgb(156, 39, 176)"}}>{selectedAddress.receiverName}, </span>
@@ -576,7 +575,7 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                             ) : (
                                 <div className="flex items-center justify-between bg-white" style={{ marginBottom: "0.75rem", marginLeft: "0.8125rem", marginRight: "0.8125rem", padding: "0.625rem 0.75rem 0.75rem 0.625rem", borderRadius: "0.625rem" }}>
                                     <div><span className="text-heading6 " style={{color: "rgb(38, 42, 51)"}}>Ordering for someone else?</span></div>
-                                    <button className="py-1 px-7 text-base border-skin-primary border border-none rounded-md !border-solid !px-2 !py-1 text-[#EF4372]" type="button">
+                                    <button className="py-1 px-7 text-base border-skin-primary border border-none rounded-md !border-solid !px-2 !py-1 text-[#EF4372]" type="button" onClick={()=>setShowRecieverForm(true)}>
                                         <div className="flex items-center justify-center">Add Details</div>
                                     </button>
                                 </div>
