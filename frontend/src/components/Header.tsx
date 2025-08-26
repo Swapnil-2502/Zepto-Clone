@@ -9,13 +9,13 @@ import CartToast from "./Cart/CartToast";
 import { useAddress } from "../contexts/AddressContext";
 
 export type Address = {
-    saveAddressAs: string;
+    _id: string;
+    saveAddressAs: "Home" | "Work" | "Other";
     HouseNumber: string;
     BlockNumber: string;
     landmark?: string;
     receiverName?: string;
     receiverContact?: string;
-    _id: string;
 }
 
 
@@ -213,7 +213,10 @@ const Header: React.FC = () => {
         <SelectLocation 
           onClose={() => setAddressModel(false)}  
           onAddressSelect={(address) => {
-            setSelectedAddress(address);
+            setSelectedAddress({
+              ...address,
+              saveAddressAs: address.saveAddressAs as "Home" | "Work" | "Other"
+            });
             setAddressModel(false);}
           }
         />
