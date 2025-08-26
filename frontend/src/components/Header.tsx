@@ -5,7 +5,8 @@ import { useAuth } from "../contexts/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import SelectLocation from "./header/SelectLocation";
 import { useCart } from "../contexts/CartContext";
-import CartToast from "./products/CartToast";
+import CartToast from "./Cart/CartToast";
+import { useAddress } from "../contexts/AddressContext";
 
 export type Address = {
     saveAddressAs: string;
@@ -21,7 +22,7 @@ export type Address = {
 const Header: React.FC = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [addressModel, setAddressModel] = useState(false);
-  const { selectedAddress, setSelectedAddress } = useAuth(); 
+  const { selectedAddress, setSelectedAddress } = useAddress(); 
   const {user} = useAuth()
 
   const {totalItems} = useCart()

@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { AuthProvider } from './contexts/AuthContext.tsx'
 import { AddressProvider } from './contexts/AddressContext.tsx'
+import { CartProvider } from './contexts/CartContext.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 
@@ -15,7 +16,8 @@ import '../public/zepto-clone-styles/zepto-style5.css'
 import '../public/zepto-clone-styles/zepto-style6.css'
 import '../public/zepto-clone-styles/zepto-style7.css'
 import '../public/zepto-clone-styles/zepto-style8.css'
-import { CartProvider } from './contexts/CartContext.tsx'
+import '../public/zepto-clone-styles/zepto-style9.css'
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

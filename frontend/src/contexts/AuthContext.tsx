@@ -114,6 +114,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setToken(null)
         localStorage.removeItem("token")
         localStorage.removeItem("user")
+        localStorage.removeItem("cartItems")
+        clearSelectedAddress()
     }
 
     return (
