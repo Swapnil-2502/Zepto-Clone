@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useCart, type CartItems } from "../../contexts/CartContext";
 import { useAddress } from "../../contexts/AddressContext";
 import ReceiverForm from "./ReceiverForm";
+import SelectLocation from "../header/SelectLocation";
 
 
 const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => void}) => {
@@ -14,8 +15,9 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
     const [tipAmount, setTipAmount] = useState('')
     const [selectedTip, setSelectedTip] = useState<number | null>(null)
     const { cartItems, updateQuantity } = useCart();
-    const {selectedAddress} = useAddress();
+    const {selectedAddress, setSelectedAddress} = useAddress();
     const [showRecieverForm, setShowRecieverForm] = useState(false)
+    const [addressModel, setAddressModel] = useState(false)
 
     const totalItem = cartItems.reduce((total,item) => total + (item.price * item.quantity),0)
     const GST = totalItem * 0.05264
@@ -584,10 +586,29 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                             <div className="h-56"></div>
                             
                             <div className="sticky bottom-0 right-0 z-[101] h-fit w-full overflow-hidden rounded-t-md bg-white px-3 pt-1.5 shadow-lg lg:w-[400px]">
-                                <div className="flex items-center">
-                                    <button className="my-2.5 h-[52px] w-full rounded-xl bg-skin-primary text-center">
-                                        <span className="text-body1 text-white">Add Address to proceed</span>
+                                {selectedAddress && (
+                                    <button className="flex w-full items-start justify-start px-1 py-2" onClick={()=>setAddressModel(true)}>
+                                        <img alt="" fetchPriority="low" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" className="relative overflow-hidden min-w-[38px]" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/tr:w-100,ar-40-40,pr-true,f-auto,q-80/app/images/address_home_icon_v3.png" style={{color: "transparent", objectFit: "contain"}} />
+                                        <div className="overflow-hidden pl-[10px]">
+                                            <div className="flex items-center justify-start">
+                                                <p className="pr-2 text-cta1">Delivering to {selectedAddress.saveAddressAs}</p>
+                                                <img alt="" fetchPriority="low" loading="lazy" width="8" height="4" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/app/images/bold-arrow-down.png?tr=w-undefined,q-70" style={{color: "transparent", objectFit: "contain"}}/>
+                                            </div>
+                                            <p className="truncate text-[14px] font-[400] leading-[16px] text-[rgba(2,_6,_12,_0.60)]">{selectedAddress.HouseNumber}, {selectedAddress.BlockNumber}, {selectedAddress.landmark} </p>
+                                        </div>
                                     </button>
+                                )}
+                                <div className="flex items-center">
+                                    {selectedAddress ? (
+                                        <button className="my-2.5 h-[52px] w-full rounded-xl bg-skin-primary text-center">
+                                            <span className="text-body1 text-white">Click to Pay {toPAY.toFixed(2)}</span>
+                                        </button>
+                                    ):(
+                                        <button className="my-2.5 h-[52px] w-full rounded-xl bg-skin-primary text-center">
+                                            <span className="text-body1 text-white">Add Address to proceed</span>
+                                        </button>
+                                    )}
+                                    
                                 </div>
                             </div>
                     </div>
@@ -599,6 +620,18 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                 onClose={() => setShowRecieverForm(false)}
             />
         )}
+        {addressModel && (
+        <SelectLocation 
+          onClose={() => setAddressModel(false)}  
+          onAddressSelect={(address) => {
+            setSelectedAddress({
+              ...address,
+              saveAddressAs: address.saveAddressAs as "Home" | "Work" | "Other"
+            });
+            setAddressModel(false);}
+          }
+        />
+      )}
     </>
   )
 }
