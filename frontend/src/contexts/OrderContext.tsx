@@ -13,7 +13,7 @@ export type OrderItem = {
     imageURL: string;
 }
 
-type Order = {
+export type Order = {
     _id: string,
     userId: string,
     cartItems: OrderItem[],
