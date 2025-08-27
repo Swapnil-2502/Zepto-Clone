@@ -8,7 +8,7 @@ import { CartProvider } from './contexts/CartContext.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 
-import '../public/zepto-clone-styles/zepto-style1.css'
+//import '../public/zepto-clone-styles/zepto-style1.css'
 import '../public/zepto-clone-styles/zepto-style2.css'
 import '../public/zepto-clone-styles/zepto-style3.css'
 import '../public/zepto-clone-styles/zepto-style4.css'
