@@ -5,14 +5,14 @@ import Order from "../models/Order";
 
 export const getOrders = async (req: AuthRequest, res: Response) => {
     const userId = req.userId
-
+    
     try{
         if(!userId) return res.status(404).json({message: "User ID not send"})
 
         const user = await User.findById(userId)
         if(!user) return res.status(404).json({message: "User not found"})
 
-        const Allorders = await Order.findById(userId).sort({ createdAt: -1 }); 
+        const Allorders = await Order.find({user: userId}).sort({ createdAt: -1 }); 
 
         res.status(200).json({message: "Orders fetched successfully", orders: Allorders })
     }
