@@ -3,7 +3,7 @@ import { useAuth } from "./AuthContext";
 import axios from "../api/axios";
 
 
-type Address = {
+export type Address = {
     _id: string;
     saveAddressAs: "Home" | "Work" | "Other";
     HouseNumber: string,

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useCart, type CartItems } from "../../contexts/CartContext";
-import { useAddress } from "../../contexts/AddressContext";
+import { useAddress, type Address } from "../../contexts/AddressContext";
 import ReceiverForm from "./ReceiverForm";
 import SelectLocation from "../header/SelectLocation";
+import { useOrder, type OrderItem } from "../../contexts/OrderContext";
 
 
 const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => void}) => {
+
+    const {createOrder} = useOrder()
 
     const [toPay, setToPay] = useState(false)
     const [toDelivery, setToDelivery] = useState(false)
@@ -14,26 +17,25 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
     const [showTipInput, setshowTipInput] = useState(false);
     const [tipAmount, setTipAmount] = useState('')
     const [selectedTip, setSelectedTip] = useState<number | null>(null)
-    const { cartItems, updateQuantity } = useCart();
+    const { cartItems, updateQuantity, clearCartItems } = useCart();
     const {selectedAddress, setSelectedAddress} = useAddress();
     const [showRecieverForm, setShowRecieverForm] = useState(false)
     const [addressModel, setAddressModel] = useState(false)
+    const [paid, setPaid] = useState(false)
 
     const totalItem = cartItems.reduce((total,item) => total + (item.price * item.quantity),0)
     const GST = totalItem * 0.05264
     const totalMRP = cartItems.reduce((total,item) => total + (item.mrp * item.quantity),0) + 18.99 + 30 + GST;
     const toPAY= totalItem + GST + 9.99;
 
-                       
-
     useEffect(() => {
         if (isOpen) {
-        document.body.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
         } else {
-        document.body.style.overflow = 'unset';
+            document.body.style.overflow = 'unset';
         }
         return () => {
-        document.body.style.overflow = 'unset';
+            document.body.style.overflow = 'unset';
         };
     }, [isOpen]);
     
@@ -84,6 +86,16 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
             setTipAmount("")
             setshowTipInput(false)
         }
+    }
+
+    const handleCreateOrder = (items: OrderItem[], address: Address) => {
+        createOrder(items,address)
+
+        setPaid(true)
+        setTimeout(()=>{
+            closeCart()
+            clearCartItems()
+        },4000)
     }
 
     const tipButtons = [
@@ -600,8 +612,8 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                                 )}
                                 <div className="flex items-center">
                                     {selectedAddress ? (
-                                        <button className="my-2.5 h-[52px] w-full rounded-xl bg-skin-primary text-center">
-                                            <span className="text-body1 text-white">Click to Pay {toPAY.toFixed(2)}</span>
+                                        <button className="my-2.5 h-[52px] w-full rounded-xl bg-skin-primary text-center" onClick={() => handleCreateOrder(cartItems,selectedAddress)}>
+                                            <span className="text-body1 text-white"> {paid ? "Paid" : "Click to Pay"}  {toPAY.toFixed(2)}</span>
                                         </button>
                                     ):(
                                         <button className="my-2.5 h-[52px] w-full rounded-xl bg-skin-primary text-center">

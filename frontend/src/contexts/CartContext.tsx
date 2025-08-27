@@ -16,6 +16,7 @@ type CartContextType = {
     cartItems: CartItems[];
     addToCart: (product: ProductData, quantity: number) => void;
     updateQuantity: (productId: string, quantity: number) => void;
+    clearCartItems: () => void;
     totalItems: number;
 }
 
@@ -28,8 +29,8 @@ export const CartProvider = ({children}: {children: React.ReactNode }) => {
     });
 
     useEffect(() => {
-        localStorage.setItem("cartItems", JSON.stringify(cartItems))
-    },[cartItems])
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, [cartItems]);
 
     const addToCart = (product: ProductData, quantity: number) => {
         if (quantity <= 0) return;
@@ -70,10 +71,14 @@ export const CartProvider = ({children}: {children: React.ReactNode }) => {
         );
     };
 
+    const clearCartItems = () => {
+        setCartItems([])
+    }
+
     const totalItems = cartItems.reduce((sum, item) => sum + item.quantity,0)
 
     return (
-        <CartContext.Provider value={{cartItems, addToCart, updateQuantity,totalItems}}>
+        <CartContext.Provider value={{cartItems, addToCart, updateQuantity,totalItems,clearCartItems}}>
             {children}
         </CartContext.Provider>
     )

@@ -17,6 +17,7 @@ import '../public/zepto-clone-styles/zepto-style6.css'
 import '../public/zepto-clone-styles/zepto-style7.css'
 import '../public/zepto-clone-styles/zepto-style8.css'
 import '../public/zepto-clone-styles/zepto-style9.css'
+import { OrderProvider } from './contexts/OrderContext.tsx'
 
 
 createRoot(document.getElementById('root')!).render(
@@ -25,7 +26,9 @@ createRoot(document.getElementById('root')!).render(
       <AuthProvider>
         <AddressProvider>
           <CartProvider>
-            <App />
+            <OrderProvider>
+              <App />
+            </OrderProvider>
           </CartProvider>
         </AddressProvider>
         <Toaster position="top-center" toastOptions={{style:{marginTop:'60px'}}} />

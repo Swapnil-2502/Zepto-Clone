@@ -13,8 +13,8 @@ const Cart = () => {
     const { cartItems } = useCart();
 
     useEffect(()=>{
-        const params = new URLSearchParams(location.search)
-        setIsOpen(params.get("cart") === "open")
+      const params = new URLSearchParams(location.search)
+      setIsOpen(params.get("cart") === "open")
     },[location.search])
 
     const closeCart  = () => {
