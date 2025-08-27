@@ -13,6 +13,8 @@ const OrderDetail: React.FC<OrderDetailProps> = ({orders,onBack,formatDate,calcu
     const totalBill = calculateTotal(orders?.cartItems ?? [])
     const totalMRP = calculateTotalMRP(orders?.cartItems ?? [])
 
+    const {date,time} = formatDate(orders?.createdAt ?? "")
+
   return (
     <>
         <div className="hidden flex-col lg:block lg:h-[80vh] lg:w-2/3 lg:overflow-y-scroll lg:rounded-r-3xl lg:border-l" id="desktop-order-details-section">
@@ -172,7 +174,7 @@ const OrderDetail: React.FC<OrderDetailProps> = ({orders,onBack,formatDate,calcu
                             <div className="my-3">
                                 <p className="text-body4 text-slate-500">Order Placed</p>
                                 <div className="flex items-center space-x-1">
-                                    <p className="text-body4 leading-3"> 27th Aug 2025, 08:51 pm</p>
+                                    <p className="text-body4 leading-3"> {date} {time}</p>
                                 </div>
                             </div>
                         </div>
