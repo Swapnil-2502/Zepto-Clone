@@ -1,11 +1,19 @@
-import { useOrder, type OrderItem } from "../../contexts/OrderContext"
+
+import { useOrder, type Order, type OrderItem } from "../../contexts/OrderContext"
+import { useState } from "react"
+import OrderDetail from "./OrderDetail"
 
 
 const Orders = () => {
     const {orders} = useOrder()
+    const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
 
     const calculateTotal = (cartItems: OrderItem[]) => {
         return cartItems.reduce((total,item) => total + (item.price * item.quantity),0)
+    }
+
+    const calculateTotalMRP = (cartItems: OrderItem[]) => {
+        return cartItems.reduce((total,item) => total + (item.mrp * item.quantity),0)
     }
     
     const formatDate = (dateString: string) => {
@@ -15,6 +23,10 @@ const Orders = () => {
             time: date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })
         };
     };
+
+    if(selectedOrder){
+        return <OrderDetail orders={selectedOrder} formatDate={formatDate} calculateTotal={calculateTotal} calculateTotalMRP={calculateTotalMRP} onBack={() => setSelectedOrder(null)} />
+    }
 
   return (
     <>
@@ -28,13 +40,13 @@ const Orders = () => {
                         <h1 className="font-subtitle text-lg tracking-wider line-clamp-1 mr-5 overflow-hidden text-ellipsis font-semibold">Settings</h1>
                     </div>
                 </header>
-                <div className="">
+                <div className="cursor-pointer">
                     {orders.map((order) => {
                         const totalBill = calculateTotal(order.cartItems)
                         const timeAndDate = formatDate(order.createdAt)
                         return (
-                        <a href="/order/0198ec1e-d72f-70ea-ac79-5a68f480a3ff?isArchived=false">
-                            <div className="shadow-base rounded relative m-4 !rounded-2xl bg-white py-4 !shadow-none mb-0 !pb-0">
+                        // <Link to={`/order/${order._id}`}>
+                            <div className="shadow-base rounded relative m-4 !rounded-2xl bg-white py-4 !shadow-none mb-0 !pb-0" onClick={()=>setSelectedOrder(order)}>
                                 <div className="px-4">
                                     <div className="relative">
                                         <div className="no-scrollbar flex w-full space-x-3 overflow-scroll">
@@ -74,7 +86,7 @@ const Orders = () => {
                                     </button>
                                 </div>
                             </div>
-                        </a>
+                        // </Link>
                     )})}
                 </div>
             </div>
