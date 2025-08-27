@@ -4,6 +4,7 @@ import AccountFooter from "./account/AccountFooter"
 import AccountProfile from "./account/AccountProfile"
 import AccountAddress from "./account/AccountAddress"
 import AccountCustomerSupport from "./account/AccountCustomerSupport"
+import AccountOrders from "./account/AccountOrders"
 
 const Account: React.FC = () => {
     const renderedContent = () => {
@@ -14,6 +15,10 @@ const Account: React.FC = () => {
                 return <AccountAddress />
             case "/account/support":
                 return <AccountCustomerSupport />
+            case "/account/orders":
+                return <AccountOrders />
+            default:
+                return <AccountProfile />
         }
     }
   return (
