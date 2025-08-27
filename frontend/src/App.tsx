@@ -18,6 +18,7 @@ function App() {
           <Route path="/account/profile" element={<Account />} />
           <Route path="/account/addresses" element={<Account />} />
           <Route path="/account/support" element={<Account />} />
+          <Route path="/account/orders" element={<Account />} />
           <Route path="/pn/:productTitle/pvid/:productId" element={<ProductDetail />} />
           <Route path="/uncl/:Category" element={<ProductPage />} />
         </Routes>
