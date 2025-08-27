@@ -24,6 +24,8 @@ export const getOrders = async (req: AuthRequest, res: Response) => {
 
 export const createOrder = async (req: AuthRequest, res: Response) => {
     const userId = req.userId
+    console.log("USER->",req.userId)
+    console.log(req.body)
     const {items,address} = req.body
     try{
         if(!items || items.length === 0 || !address){
@@ -34,8 +36,8 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
         if(!existingUser) return res.status(404).json({message: "User doesnt exists"})
 
         const newOrder = new Order({
-            userId,
-            items,
+            user: userId,
+            cartItems: items,
             address
         })
 
