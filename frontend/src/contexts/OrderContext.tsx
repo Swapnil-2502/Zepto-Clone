@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import type { Address } from "./AddressContext";
 import axios from "../api/axios";
 import { useAuth } from "./AuthContext";
@@ -37,16 +37,28 @@ export const OrderProvider = ({children} : {children: React.ReactNode}) => {
     const headers = {
         Authorization: `Bearer ${token}`,
     }
+   
+    const getOrders =  useCallback(async () => {
+        if (!token) {
+            console.error("No token available");
+            return;
+        }
 
-    const getOrders = async () => {
         try{
-            const res = await axios.get("/order", {headers});
+            const res = await axios.get("/order",{headers});
             setOrders(res.data.orders)
         }
         catch(error){
             console.error("Error fetching orders:", error);
         }
-    }
+    },[token])
+
+    useEffect(()=>{
+        if(token){
+            getOrders()
+        }
+        
+    },[token,getOrders])
 
     const createOrder = async (items: OrderItem[], address: Omit<Address, "_id"> ) => {
         try{
