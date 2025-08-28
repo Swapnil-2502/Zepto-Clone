@@ -18,6 +18,7 @@ type CartContextType = {
     updateQuantity: (productId: string, quantity: number) => void;
     clearCartItems: () => void;
     totalItems: number;
+    setSelectedCartItems: (cartItems: CartItems[]) => void
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -71,6 +72,11 @@ export const CartProvider = ({children}: {children: React.ReactNode }) => {
         );
     };
 
+    const setSelectedCartItems = (cartItems: CartItems[]) => {
+        setCartItems(cartItems)
+        localStorage.setItem("cartItems",JSON.stringify(cartItems))
+    }
+
     const clearCartItems = () => {
         setCartItems([])
     }
@@ -78,7 +84,7 @@ export const CartProvider = ({children}: {children: React.ReactNode }) => {
     const totalItems = cartItems.reduce((sum, item) => sum + item.quantity,0)
 
     return (
-        <CartContext.Provider value={{cartItems, addToCart, updateQuantity,totalItems,clearCartItems}}>
+        <CartContext.Provider value={{cartItems, addToCart, updateQuantity,totalItems,clearCartItems,setSelectedCartItems}}>
             {children}
         </CartContext.Provider>
     )

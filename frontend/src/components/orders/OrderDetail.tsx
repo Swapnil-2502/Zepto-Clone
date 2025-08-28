@@ -1,3 +1,4 @@
+import { useCart } from "../../contexts/CartContext";
 import type { Order, OrderItem } from "../../contexts/OrderContext"
 
 interface OrderDetailProps {
@@ -10,8 +11,14 @@ interface OrderDetailProps {
 
 const OrderDetail: React.FC<OrderDetailProps> = ({orders,onBack,formatDate,calculateTotal,calculateTotalMRP}) => {
 
+    const {setSelectedCartItems} = useCart()
+
     const totalBill = calculateTotal(orders?.cartItems ?? [])
     const totalMRP = calculateTotalMRP(orders?.cartItems ?? [])
+    
+    const handleOrderAgain = (orders: Order) => {
+        setSelectedCartItems(orders.cartItems)
+    }
 
     const {date,time} = formatDate(orders?.createdAt ?? "")
 
@@ -180,7 +187,12 @@ const OrderDetail: React.FC<OrderDetailProps> = ({orders,onBack,formatDate,calcu
                         </div>
                     </div>
                     <div className="z-[101] border-t bg-white p-4">
-                        <button className="py-1 px-7 text-base border-skin-primary border bg-skin-primary text-skin-base rounded-md tracking-widest w-full !py-3" type="button">
+                        <button
+                            className="py-1 px-7 text-base border-skin-primary border bg-skin-primary text-skin-base rounded-md tracking-widest w-full !py-3"
+                            type="button"
+                            onClick={() => orders && handleOrderAgain(orders)}
+                            disabled={!orders}
+                        >
                             <div className="flex items-center justify-center">Order Again</div>
                         </button>
                     </div>

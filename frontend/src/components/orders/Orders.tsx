@@ -2,10 +2,12 @@
 import { useOrder, type Order, type OrderItem } from "../../contexts/OrderContext"
 import { useState } from "react"
 import OrderDetail from "./OrderDetail"
+import { useCart } from "../../contexts/CartContext"
 
 
 const Orders = () => {
     const {orders} = useOrder()
+    const {setSelectedCartItems} = useCart()
     const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
 
     const calculateTotal = (cartItems: OrderItem[]) => {
@@ -23,6 +25,10 @@ const Orders = () => {
             time: date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })
         };
     };
+
+    const handleOrderAgain = (orders: Order) => {
+        setSelectedCartItems(orders.cartItems)
+    }
 
     if(selectedOrder){
         return <OrderDetail orders={selectedOrder} formatDate={formatDate} calculateTotal={calculateTotal} calculateTotalMRP={calculateTotalMRP} onBack={() => setSelectedOrder(null)} />
@@ -46,8 +52,8 @@ const Orders = () => {
                         const timeAndDate = formatDate(order.createdAt)
                         return (
                         // <Link to={`/order/${order._id}`}>
-                            <div className="shadow-base rounded relative m-4 !rounded-2xl bg-white py-4 !shadow-none mb-0 !pb-0" onClick={()=>setSelectedOrder(order)}>
-                                <div className="px-4">
+                            <div className="shadow-base rounded relative m-4 !rounded-2xl bg-white py-4 !shadow-none mb-0 !pb-0" >
+                                <div className="px-4" onClick={()=>setSelectedOrder(order)}>
                                     <div className="relative">
                                         <div className="no-scrollbar flex w-full space-x-3 overflow-scroll">
                                             {order.cartItems.map((item) => (
@@ -75,13 +81,13 @@ const Orders = () => {
                                     <div className="flex items-start justify-between">
                                         <p className="mt-1 text-body2 !text-skin-muted">Placed at {timeAndDate.date} {timeAndDate.time}</p>
                                         <div className="flex items-center">
-                                            <p className="mr-1.5 text-heading5">₹{totalBill}</p>
+                                            <p className="mr-1.5 text-heading5">₹{(totalBill + totalBill * 0.05264 + 10.99).toFixed(2) }</p>
                                             <svg fill="none" height="8" viewBox="0 0 6 10" width="8" xmlns="http://www.w3.org/2000/svg"><line stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" x1="1" x2="4.93934" y1="8.93934" y2="5"></line><line stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" x1="4.93934" x2="1" y1="5" y2="1.06066"></line></svg>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="mt-4 flex w-full gap-2 border-t">
-                                    <button className="px-7 text-base border-skin-primary border text-skin-primary border-none mx-auto w-full py-3" type="button">
+                                    <button className="px-7 text-base border-skin-primary border text-skin-primary border-none mx-auto w-full py-3" type="button" onClick={() => handleOrderAgain(order)}>
                                         <div className="flex items-center justify-center"><span className="text-cta2">Order Again</span></div>
                                     </button>
                                 </div>
