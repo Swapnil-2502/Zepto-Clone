@@ -269,7 +269,7 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                                                         <div style={{marginBottom: "8px"}}>
                                                             <div className="flex justify-between">
                                                                 <button className="flex items-center justify-start pr-2 max-w-[70%]">
-                                                                    <span className="text-body4 truncate text-left whitespace-normal" style={{color: "rgb(38, 42, 51)"}}>Item Total</span>
+                                                                    <span className="text-body4 truncate text-left whitespace-normal" style={{color: "rgb(38, 42, 51)", fontWeight: "450" }}>Item Total</span>
                                                                 </button>
                                                                 <div className="flex items-center justify-end">
                                                                     <span className="text-heading8 truncate text-left" style={{color: "rgb(38, 42, 51)"}}>₹{totalItem}</span>
@@ -279,7 +279,7 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                                                         <div style={{marginBottom: "8px"}}>
                                                             <div className="flex justify-between">
                                                                 <button className="flex items-center justify-start pr-2 border-b border-dashed max-w-[70%]">
-                                                                    <span className="text-body4 truncate text-left whitespace-normal" style={{color: "rgb(38, 42, 51)"}}>Restaurant Charges &amp; GST</span>
+                                                                    <span className="text-body4 truncate text-left whitespace-normal" style={{color: "rgb(38, 42, 51)", fontWeight: "450"}}>Restaurant Charges &amp; GST</span>
                                                                 </button>
                                                                 <div className="flex items-center justify-end">
                                                                     <span className="text-heading8 truncate text-left" style={{color: "rgb(38, 42, 51)"}}>₹{GST.toFixed(2)}</span>
@@ -289,7 +289,7 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                                                         <div style={{marginBottom: "8px"}}>
                                                             <div className="flex justify-between">
                                                                 <button className="flex items-center justify-start pr-2 border-b border-dashed max-w-[70%]">
-                                                                    <span className="text-body4 truncate text-left whitespace-normal" style={{color: "rgb(38, 42, 51)"}}>Handling Charge</span>
+                                                                    <span className="text-body4 truncate text-left whitespace-normal" style={{color: "rgb(38, 42, 51)",fontWeight: "450" }}>Handling Charge</span>
                                                                 </button>
                                                                 <div className="flex items-center justify-end">
                                                                     <span className="text-strikethrough3 truncate text-left" style={{ color: "rgb(117, 124, 141)", marginBottom: "1px", marginRight: "4px" }}>₹18.99</span>
@@ -300,7 +300,7 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                                                         <div style={{marginBottom: "8px"}}>
                                                             <div className="flex justify-between">
                                                                 <button className="flex items-center justify-start pr-2 border-b border-dashed max-w-[70%]">
-                                                                    <span className="text-body4 truncate text-left whitespace-normal" style={{color: "rgb(38, 42, 51)"}}>Delivery Fee</span>
+                                                                    <span className="text-body4 truncate text-left whitespace-normal" style={{color: "rgb(38, 42, 51)", fontWeight: "450" }}>Delivery Fee</span>
                                                                 </button>
                                                                 <div className="flex items-center justify-end">
                                                                     <span className="text-strikethrough3 truncate text-left" style={{ color: "rgb(117, 124, 141)", marginBottom: "1px", marginRight: "4px" }}>₹30</span>
@@ -313,7 +313,7 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                                                             <div style={{marginBottom: "12px"}}>
                                                                 <div className="flex justify-between">
                                                                     <button className="flex items-center justify-start pr-2 max-w-[70%]">
-                                                                        <span className="text-body4 truncate text-left whitespace-normal" style={{color: "rgb(38, 42, 51)"}}>Delivery Partner Tip</span>
+                                                                        <span className="text-body4 truncate text-left whitespace-normal" style={{color: "rgb(38, 42, 51)", fontWeight: "450" }}>Delivery Partner Tip</span>
                                                                     </button>
                                                                     <div className="flex items-center justify-end">
                                                                         <span className="text-heading8 truncate text-left" style={{color: "rgb(38, 42, 51)"}}>₹{tipAmount || selectedTip}</span>
