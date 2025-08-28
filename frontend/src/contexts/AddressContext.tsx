@@ -82,13 +82,13 @@ export const AddressProvider = ({children}: {children: React.ReactNode }) => {
             setAddress(res.data.addresses)
 
             if (selectedAddress && selectedAddress._id === id) {
-                // Find the updated address in the new array
+                
                 const updatedSelectedAddress = updatedAddresses.find((addr: Address) => addr._id === id);
                 if (updatedSelectedAddress) {
                     setSelectedAddressState(updatedSelectedAddress);
                     localStorage.setItem("selectedAddress", JSON.stringify(updatedSelectedAddress));
                 } else {
-                    // If the updated address was deleted or not found, clear selection
+                    
                     setSelectedAddressState(null);
                     localStorage.removeItem("selectedAddress");
                 }

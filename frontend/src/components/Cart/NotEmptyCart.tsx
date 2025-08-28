@@ -38,10 +38,12 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
             document.body.style.overflow = 'unset';
         };
     }, [isOpen]);
+
+
     
-    if (!selectedAddress) {
-        return null;
-    } 
+    // if (!selectedAddress) {
+    //     return null;
+    // } 
 
     const handleToPay = () => {
         setToPay((prev) => !prev)
@@ -66,7 +68,7 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
         updateQuantity(product.productId, quantity - 1)
     }
 
-    const handleInputAmount = (e) => {
+    const handleInputAmount = (e:React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/[^0-9.]/g, '');
 
         if(value.includes('.')){
@@ -574,11 +576,11 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                             </div>
 
                             {/* Display the address line or any suitable property */}
-                            {(selectedAddress.receiverName || selectedAddress.receiverContact) ? (
+                            {(selectedAddress?.receiverName || selectedAddress?.receiverContact) ? (
                                 <div className="flex items-center justify-between bg-white" style={{marginBottom: "0.75rem", marginLeft: "0.8125rem", marginRight: "0.8125rem", padding: "0.625rem 0.75rem 0.75rem 0.625rem", borderRadius: "0.625rem"}}>
                                     <div><span className="text-heading6 " style={{color: "rgb(38, 42, 51)"}}>Ordering for </span>
-                                        <span className="text-cta2 " style={{color: "rgb(156, 39, 176)"}}>{selectedAddress.receiverName}, </span>
-                                        <span className="text-heading6 " style={{color: "rgb(38, 42, 51)"}}>{selectedAddress.receiverContact} </span>
+                                        <span className="text-cta2 " style={{color: "rgb(156, 39, 176)"}}>{selectedAddress?.receiverName}, </span>
+                                        <span className="text-heading6 " style={{color: "rgb(38, 42, 51)"}}>{selectedAddress?.receiverContact} </span>
                                     </div>
                                     <button className="py-1 px-7 text-base border-skin-primary border text-skin-primary border-none !px-0 !py-1" type="button" onClick={()=>setShowRecieverForm(true)}>
                                         <div className="flex items-center justify-center">
@@ -587,12 +589,14 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                                     </button>
                                 </div>
                             ) : (
-                                <div className="flex items-center justify-between bg-white" style={{ marginBottom: "0.75rem", marginLeft: "0.8125rem", marginRight: "0.8125rem", padding: "0.625rem 0.75rem 0.75rem 0.625rem", borderRadius: "0.625rem" }}>
-                                    <div><span className="text-heading6 " style={{color: "rgb(38, 42, 51)"}}>Ordering for someone else?</span></div>
-                                    <button className="py-1 px-7 text-base border-skin-primary border border-none rounded-md !border-solid !px-2 !py-1 text-[#EF4372]" type="button" onClick={()=>setShowRecieverForm(true)}>
-                                        <div className="flex items-center justify-center">Add Details</div>
-                                    </button>
-                                </div>
+                                selectedAddress ? (
+                                    <div className="flex items-center justify-between bg-white" style={{ marginBottom: "0.75rem", marginLeft: "0.8125rem", marginRight: "0.8125rem", padding: "0.625rem 0.75rem 0.75rem 0.625rem", borderRadius: "0.625rem" }}>
+                                        <div><span className="text-heading6 " style={{color: "rgb(38, 42, 51)"}}>Ordering for someone else?</span></div>
+                                        <button className="py-1 px-7 text-base border-skin-primary border border-none rounded-md !border-solid !px-2 !py-1 text-[#EF4372]" type="button" onClick={()=>setShowRecieverForm(true)}>
+                                            <div className="flex items-center justify-center">Add Details</div>
+                                        </button>
+                                    </div>
+                                ) : null
                             )}
 
                             <div className="h-56"></div>
@@ -603,20 +607,20 @@ const NotEmptyCart = ({isOpen, closeCart} : {isOpen: boolean, closeCart: () => v
                                         <img alt="" fetchPriority="low" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" className="relative overflow-hidden min-w-[38px]" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/production/tr:w-100,ar-40-40,pr-true,f-auto,q-80/app/images/address_home_icon_v3.png" style={{color: "transparent", objectFit: "contain"}} />
                                         <div className="overflow-hidden pl-[10px]">
                                             <div className="flex items-center justify-start">
-                                                <p className="pr-2 text-cta1">Delivering to {selectedAddress.saveAddressAs}</p>
+                                                <p className="pr-2 text-cta1">Delivering to {selectedAddress?.saveAddressAs}</p>
                                                 <img alt="" fetchPriority="low" loading="lazy" width="8" height="4" decoding="async" data-nimg="1" className="relative overflow-hidden" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" srcSet="" src="https://cdn.zeptonow.com/app/images/bold-arrow-down.png?tr=w-undefined,q-70" style={{color: "transparent", objectFit: "contain"}}/>
                                             </div>
-                                            <p className="truncate text-[14px] font-[400] leading-[16px] text-[rgba(2,_6,_12,_0.60)]">{selectedAddress.HouseNumber}, {selectedAddress.BlockNumber}, {selectedAddress.landmark} </p>
+                                            <p className="truncate text-[14px] font-[400] leading-[16px] text-[rgba(2,_6,_12,_0.60)]">{selectedAddress?.HouseNumber}, {selectedAddress?.BlockNumber}, {selectedAddress?.landmark} </p>
                                         </div>
                                     </button>
                                 )}
                                 <div className="flex items-center">
-                                    {selectedAddress ? (
+                                    {selectedAddress! ? (
                                         <button className="my-2.5 h-[52px] w-full rounded-xl bg-skin-primary text-center" onClick={() => handleCreateOrder(cartItems,selectedAddress)}>
                                             <span className="text-body1 text-white"> {paid ? "Paid" : "Click to Pay"}  {toPAY.toFixed(2)}</span>
                                         </button>
                                     ):(
-                                        <button className="my-2.5 h-[52px] w-full rounded-xl bg-skin-primary text-center">
+                                        <button className="my-2.5 h-[52px] w-full rounded-xl bg-skin-primary text-center" onClick={() => setAddressModel(true)}>
                                             <span className="text-body1 text-white">Add Address to proceed</span>
                                         </button>
                                     )}
