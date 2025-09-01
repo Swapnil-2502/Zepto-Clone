@@ -7,7 +7,7 @@ const AccountOrders = () => {
 
   return (
     <>
-        {!orders ? <Noorders /> : <Orders />}
+        {orders.length === 0 ? <Noorders /> : <Orders />}
         
     </>
     
