@@ -13,7 +13,7 @@ const app = express()
 const PORT = process.env.PORT_NUMBER
 
 app.use(cors({
-    origin:["http://localhost:5173"],
+    origin:["http://localhost:5173","https://zepto-clone-tau.vercel.app/"],
     credentials: true,
 }))
 app.use(express.json())
