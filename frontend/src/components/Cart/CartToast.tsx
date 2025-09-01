@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const CartToast = () => {
     const {cartItems} = useCart()
     const [toast, setToast] = useState(false);
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const timeoutRef = useRef<number | null>(null);
 
     useEffect(() => {
         if(cartItems.length > 0){
@@ -16,7 +16,7 @@ const CartToast = () => {
                 clearTimeout(timeoutRef.current);
             }
 
-            timeoutRef.current = setTimeout(() => {
+            timeoutRef.current = window.setTimeout(() => {
                 setToast(false);
             }, 5000);
         }
