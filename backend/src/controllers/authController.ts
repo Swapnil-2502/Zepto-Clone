@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import User from "../models/User";
 import { AuthRequest } from "../middlewares/authMiddleware";
+import Order from "../models/Order";
 
 export const verifyOTP = async (req: Request, res: Response)=> {
     const {phone, otp } = req.body
@@ -93,6 +94,7 @@ export const deleteAccount = async (req: AuthRequest, res: Response) => {
 
     try{
         const user = await User.findByIdAndDelete(userId)
+        await Order.deleteMany({user: userId})
 
         if(!user) return res.status(404).json({ message: "User not found." });
 

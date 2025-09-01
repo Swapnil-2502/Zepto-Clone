@@ -30,7 +30,7 @@ export interface OrderDocument extends Document {
 }
 
 const OrderSchema: Schema = new Schema<OrderDocument>({
-    user: {type: Schema.Types.ObjectId, ref: "users", required: true},
+    user: {type: Schema.Types.ObjectId, ref: "users", required: true,options: { onDelete: 'CASCADE' }},
     cartItems: { type: [OrderItemSchema], required: true },
     address: {
         saveAddressAs: { type: String, enum: ["Home", "Work", "Other"], required: true },
