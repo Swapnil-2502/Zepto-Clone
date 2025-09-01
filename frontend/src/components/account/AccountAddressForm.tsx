@@ -20,7 +20,6 @@ interface AccountAddressFormProps {
 const AccountAddressForm: React.FC<AccountAddressFormProps> = ({onClose,initialData,addressId}) => {
     const [selectedType, setSelectedType] = useState<string>("");
     const {addAddress, updateAddress} = useAddress()
-   
     const [form, setForm] = useState({
         saveAddressAs: initialData?.saveAddressAs || "",
         HouseNumber: initialData?.HouseNumber || "",
@@ -123,15 +122,15 @@ const AccountAddressForm: React.FC<AccountAddressFormProps> = ({onClose,initialD
                                                                 <h4 className="block font-heading text-lg tracking-wide mb-3 mt-2">Add Address Label</h4>
                                                                 <ul className="inline-flex gap-4 mb-3">
                                                                     <li className="relative">
-                                                                        <input className="peer sr-only" id="type-Home-radio" test-id="type-Home-radio" type="radio" value="Home" name="saveAddressAs" onChange={(e) => { setSelectedType("Home"); handleChange(e); }}/>
+                                                                        <input className="peer sr-only" id="type-Home-radio" test-id="type-Home-radio" type="radio" value="Home" name="saveAddressAs" checked={form.saveAddressAs === 'Home'} onChange={(e) => { setSelectedType("Home"); handleChange(e); }}/>
                                                                         <label className="bg-skin-base border-skin-primary-void/20 border-opacity-12 hover:bg-skin-muted peer-checked:bg-skin-primary-darker peer-checked:border-skin-primary-darker text-skin-primary-darker peer-checked:text-skin-base font-norms peer-disabled:bg-skin-base peer-disabled:border-skin-primary-void/10 peer-disabled:text-skin-secondary/60 flex cursor-pointer justify-center rounded-full border px-5 py-1 text-xs focus:outline-none" htmlFor="type-Home-radio">Home</label>
                                                                     </li>
                                                                     <li className="relative">
-                                                                        <input className="peer sr-only" id="type-Work-radio" test-id="type-Work-radio" type="radio" value="Work" name="saveAddressAs" onChange={(e) => {setSelectedType("Work"); handleChange(e); }}/>
+                                                                        <input className="peer sr-only" id="type-Work-radio" test-id="type-Work-radio" type="radio" value="Work" name="saveAddressAs" checked={form.saveAddressAs === 'Work'} onChange={(e) => {setSelectedType("Work"); handleChange(e); }}/>
                                                                         <label className="bg-skin-base border-skin-primary-void/20 border-opacity-12 hover:bg-skin-muted peer-checked:bg-skin-primary-darker peer-checked:border-skin-primary-darker text-skin-primary-darker peer-checked:text-skin-base font-norms peer-disabled:bg-skin-base peer-disabled:border-skin-primary-void/10 peer-disabled:text-skin-secondary/60 flex cursor-pointer justify-center rounded-full border px-5 py-1 text-xs focus:outline-none" htmlFor="type-Work-radio">Work</label>
                                                                     </li>
                                                                     <li className="relative">
-                                                                        <input className="peer sr-only" id="type-Other-radio" test-id="type-Other-radio" type="radio" value="Other" name="saveAddressAs" onChange={(e) => {setSelectedType("Other"); handleChange(e); }}/>
+                                                                        <input className="peer sr-only" id="type-Other-radio" test-id="type-Other-radio" type="radio" value="Other" name="saveAddressAs" checked={form.saveAddressAs === 'Other'} onChange={(e) => {setSelectedType("Other"); handleChange(e); }}/>
                                                                         <label className="bg-skin-base border-skin-primary-void/20 border-opacity-12 hover:bg-skin-muted peer-checked:bg-skin-primary-darker peer-checked:border-skin-primary-darker text-skin-primary-darker peer-checked:text-skin-base font-norms peer-disabled:bg-skin-base peer-disabled:border-skin-primary-void/10 peer-disabled:text-skin-secondary/60 flex cursor-pointer justify-center rounded-full border px-5 py-1 text-xs focus:outline-none" htmlFor="type-Other-radio">Other</label>
                                                                     </li>
                                                                 </ul>
