@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom"
 import EmptyCart from "./Cart/EmptyCart";
 import NotEmptyCart from "./Cart/NotEmptyCart";
 import { useCart } from "../contexts/CartContext";
+import { useAuth } from "../contexts/AuthContext";
+import NotLoggedIn from "./Cart/NotLoggedIn";
 
 
 const Cart = () => {
@@ -11,6 +13,7 @@ const Cart = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const { cartItems } = useCart();
+    const {token} = useAuth();
 
     useEffect(()=>{
       const params = new URLSearchParams(location.search)
@@ -21,6 +24,12 @@ const Cart = () => {
         const params = new URLSearchParams(location.search)
         params.delete("cart")
         navigate(`${location.pathname}?${params.toString()}`);
+    }
+
+    console.log(token)
+
+    if(!token){
+      return <NotLoggedIn isOpen={isOpen} closeCart={closeCart} />
     }
 
   return (
